@@ -47,6 +47,9 @@ require('header.php');
                                     <tr>
                                         <td class="product-add-to-cart"><a href="my_order_details.php?id=<?php echo $row['id']?>"> <?php echo $row['id']?></a></td>
                                         <td class="product-name"> <?php echo $row['added_on']?></td>
+                                        
+                                        <div class="pdf_do" style="text-align:right;"><a href="order_pdf.php?id=<?php echo $row['id']?>">PDF</a></div>
+                                        
                                         <td class="product-name"> 
                                         <?php echo $row['address']?><br/>
                                         <?php echo $row['city']?><br/>

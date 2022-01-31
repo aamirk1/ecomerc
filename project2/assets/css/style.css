@@ -3360,3 +3360,8 @@ footer.site-footer .footer-inner a {
     color: red;
     margin-top: 15px;
 }
+.pdf_download{
+    font-weight: 600;
+    font-size: 20px;
+    padding: 5px 0;
+}

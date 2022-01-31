@@ -13,6 +13,7 @@ $res=mysqli_query($con,$sql);
 			<div class="card-body">
 			   <h4 class="box-title">Order </h4>
 			</div>
+			<div class="pdf_download" style="text-align:right;"><a href="">PDF</a></div>
 			<div class="card-body--">
 			    <div class="table-stats order-table ov-h">
 					<table class="table">
@@ -33,6 +34,7 @@ $res=mysqli_query($con,$sql);
 							?>                                    
 							<tr>
 								<td class="product-add-to-cart"><a href="orders_details.php?id=<?php echo $row['id']?>"> <?php echo $row['id']?></a></td>
+								
 								<td class="product-name"> <?php echo $row['added_on']?></td>
 								<td class="product-name"> 
 								<?php echo $row['address']?><br/>

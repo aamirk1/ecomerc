@@ -1,5 +1,6 @@
 <?php 
 require('header.php');
+
 $order_id=get_safe_value($con,$_GET['id']);
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/44.jpg) no-repeat scroll center center / cover ;">
@@ -25,6 +26,7 @@ $order_id=get_safe_value($con,$_GET['id']);
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
+                
                 <div class="wishlist-content">
                     <form action="#">
                         <div class="wishlist-table table-responsive">
