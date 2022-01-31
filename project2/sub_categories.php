@@ -75,7 +75,7 @@ $res=mysqli_query($con,$sql);
 	  </div>
    </div>
 </div>
-</div>
+
 <?php
 require('footer.inc.php');
 ?>

@@ -11,7 +11,7 @@
 
 
 .slider__bg--1 {
-  background: rgba(0, 0, 0, 0) url("../../images/slider/bg/sb.jpg") no-repeat scroll 0 0 / cover ;
+  background: rgba(0, 0, 0, 0) url("../../images/slider/bg/1.jpg") no-repeat scroll 0 0 / cover ;
 }
 .slider__bg--2 {
   background: rgba(0, 0, 0, 0) url("../../images/slider/bg/2.jpg") no-repeat scroll 0 0 / cover ;
@@ -34,7 +34,7 @@
 .slider__fixed--height {
   align-items: center;
   display: flex;
-  height: 550px;
+  height: 250px;
 }
 .slider--one .slide {
     align-items: center;
@@ -75,6 +75,8 @@
 }
 .slide__thumb {
     text-align: right;
+    width: 1900px;
+    height: 240px;
 }
 
 

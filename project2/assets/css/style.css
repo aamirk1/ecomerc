@@ -1980,8 +1980,8 @@ header .form-inline .search-form.close {
     color: #868e96;
     font-size: 12px;
     font-weight: 400;
-    padding: .75em 1.10em;
-    text-transform: uppercase
+    padding: .75em 0.7em;
+    text-transform: uppercase;
 }
 
 .table-stats table th img,
