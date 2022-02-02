@@ -3,8 +3,7 @@ function send_msg(){
     var email=jQuery("#email").val();
     var mobile=jQuery("#mobile").val();
     var comment=jQuery("#comment").val();
-    var is_error="";
-
+    
     if(name==""){
         alert('Please Enter name');
     }else if(email==""){
@@ -17,7 +16,7 @@ function send_msg(){
         jQuery.ajax({
             url:'send_message.php',
             type:'post',
-            data:'name'+name+'&email='+email+'&mobile'+mobile+'&comment='+comment,
+            data:'name='+name+'&email='+email+'&mobile='+mobile+'&comment='+comment,
             success:function(result){
                 alert(result);
             }
@@ -39,7 +38,7 @@ function user_register(){
         jQuery('#email_error').html('Please Enter Email');
         is_error='yes';
     }if(mobile==""){
-        jQuery('#mobile_error').html('Please Enter Email');
+        jQuery('#mobile_error').html('Please Enter Mobile');
         is_error='yes';
     }if(password==""){
         jQuery('#password_error').html('Please Enter Password');
@@ -105,7 +104,11 @@ function manage_cart(pid,type){
             if(type=='update' || type=='remove'){
                 window.location.href=window.location.href;
             }
-            jQuery('.htc__qua').html(result);
+            if(result=='Not_available'){
+                alert('Qty Not Available');
+            }else{
+                jQuery('.htc__qua').html(result);
+            }
         }
     });
 }

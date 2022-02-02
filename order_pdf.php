@@ -3,10 +3,11 @@ include('vendor/autoload.php');
 require('connection.inc.php');
 require('function.inc.php');
 
-if(!isset($_SESSION['USER_ID'])){
-    die();
+if(!$_SESSION['ADMIN_LOGIN']){
+    if(!isset($_SESSION['USER_ID'])){
+        die();
+    }
 }
-
 $order_id=get_safe_value($con,$_GET['id']);
 $css=file_get_contents('css/bootstrap.min.css');
 $css.=file_get_contents('style.css');
@@ -23,8 +24,14 @@ $html='<div class="wishlist-table table-responsive">
             </tr>
         </thead>
         <tbody>';
-        $uid=$_SESSION['USER_ID'];
-        $res=mysqli_query($con,"select distinct(order_details.id), order_details.*,product.name,product.image from order_details,product, `order` where order_details.order_id='$order_id' and `order`.user_id='$uid' and order_details.product_id=product.id");
+        
+        if(isset($_SESSION['ADMIN_LOGIN'])){
+            $res=mysqli_query($con,"select distinct(order_details.id), order_details.*,product.name,product.image from order_details,product, `order` where order_details.order_id='$order_id' and order_details.product_id=product.id");
+        }else{
+            $uid=$_SESSION['USER_ID'];
+            $res=mysqli_query($con,"select distinct(order_details.id), order_details.*,product.name,product.image from order_details,product, `order` where order_details.order_id='$order_id' and `order`.user_id='$uid' and order_details.product_id=product.id");
+        }
+        
         $total_price=0;  
         if(mysqli_num_rows($res)==0){
             die();

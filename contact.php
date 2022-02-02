@@ -68,7 +68,7 @@ require('header.php');
                             </div>
                         </div>
                         <div class="col-xs-12">
-                            <form id="contact-form" action="#" method="post">
+                            <form id="contact-form" method="post">
                                 <div class="single-contact-form">
                                     <div class="contact-box name">
                                         <input type="text" id="name" name="name" placeholder="Your Name*">
@@ -78,7 +78,7 @@ require('header.php');
                                 </div>
                                 <div class="single-contact-form">
                                     <div class="contact-box message">
-                                        <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                                        <textarea name="comment" id="comment" placeholder="Your Message"></textarea>
                                     </div>
                                 </div>
                                 <div class="contact-btn">
