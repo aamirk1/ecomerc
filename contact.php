@@ -18,8 +18,6 @@ require('header.php');
                 </div>
             </div>
         </div>
-        <!-- End Bradcaump area -->
-        <!-- Start Contact Area -->
         <section class="htc__contact__area ptb--100 bg__white">
             <div class="container">
                 <div class="row">
@@ -93,8 +91,6 @@ require('header.php');
                 </div>
             </div>
         </section>
-        <!-- End Contact Area -->
-    <!-- Google Map js -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo "></script>
     <script src="js/contact-map.js"></script>
     <script>

@@ -1,10 +1,8 @@
 <?php require('header.php')?>
 <div class="body__overlay"></div>
         
-<!-- Start Slider Area -->
 <div class="slider__container slider--one bg__cat--3">
     <div class="slide__container slider__activation__wrap owl-carousel">
-        <!-- Start Single Slide -->
         <div class="single__slide animation__style01 slider__fixed--height">
             <div class="container">
                 <div class="row align-items__center">
@@ -17,8 +15,6 @@
                 </div>
             </div>
         </div>
-        <!-- End Single Slide -->
-        <!-- Start Single Slide -->
         <div class="single__slide animation__style01 slider__fixed--height">
             <div class="container">
                 <div class="row align-items__center">
@@ -64,19 +60,14 @@
                 </div>
             </div>
         </div>
-        
-        <!-- End Single Slide -->
     </div>
 </div>
-<!-- Start Slider Area -->
-<!-- Start Category Area -->
 <section class="htc__category__area ptb--100">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="section__title--2 text-center">
                     <h2 class="title__line">New Arrivals</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
                 </div>
             </div>
         </div>
@@ -87,7 +78,6 @@
                     $get_product=get_product($con,4);
                     foreach($get_product as $list){
                     ?>
-                    <!-- Start Single Category -->
                     <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
                         <div class="category">
                             <div class="ht__cat__thumb">
@@ -110,22 +100,18 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Category -->
                     <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- End Category Area -->
-<!-- Start Product Area -->
 <section class="ftr__product__area ptb--100">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="section__title--2 text-center">
                     <h2 class="title__line">Best Seller</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
                 </div>
             </div>
         </div>
@@ -135,7 +121,6 @@
             $get_product=get_product($con,4,'','','','','yes');
             foreach($get_product as $list){
             ?>
-            <!-- Start Single Category -->
             <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
                 <div class="category">
                     <div class="ht__cat__thumb">
@@ -158,11 +143,9 @@
                     </div>
                 </div>
             </div>
-            <!-- End Single Category -->
             <?php } ?>
         </div>
     </div>
 </section>
-<!-- End Product Area -->
 <?php require('footer.inc.php')?>
         

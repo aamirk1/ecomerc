@@ -8,7 +8,7 @@ if(isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN']=='yes'){
     <?php
 }
 ?>
-<!-- Start Bradcaump area -->
+
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/44.jpg) no-repeat scroll center center / cover ;">
         <div class="ht__bradcaump__wrap">
             <div class="container">
@@ -26,8 +26,6 @@ if(isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN']=='yes'){
             </div>
         </div>
     </div>
-    <!-- End Bradcaump area -->
-    <!-- Start Contact Area -->
     <section class="htc__contact__area ptb--100 bg__white">
         <div class="container">
             <div class="row">

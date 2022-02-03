@@ -18,8 +18,6 @@ require('header.php');
         </div>
     </div>
 </div>
-<!-- End Bradcaump area -->
-<!-- cart-main-area start -->
 <div class="cart-main-area ptb--100 bg__white">
     <div class="container">
         <div class="row">

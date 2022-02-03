@@ -31,8 +31,6 @@ $res=mysqli_query($con,"select product.name,product.image,product.price,product.
         </div>
     </div>
 </div>
-<!-- End Bradcaump area -->
-<!-- cart-main-area start -->
 <div class="cart-main-area ptb--100 bg__white">
     <div class="container">
         <div class="row">

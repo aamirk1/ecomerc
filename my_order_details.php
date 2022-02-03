@@ -20,8 +20,6 @@ $order_id=get_safe_value($con,$_GET['id']);
         </div>
     </div>
 </div>
-<!-- End Bradcaump area -->
-<!-- cart-main-area start -->
 <div class="wishlist-area ptb--100 bg__white">
     <div class="container">
         <div class="row">
