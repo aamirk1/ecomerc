@@ -70,9 +70,9 @@
     color: #fff;
 }
 .slide__thumb {
-    text-align: right;
-    width: 1900px;
-    height: 240px;
+    align-items: center;
+    width: 1200px;
+    height: 284px;
 }
 
 
@@ -220,4 +220,3 @@
 }
 .slider__activation__wrap--5 .single-slide:focus{
   outline: none;}
-}

@@ -180,7 +180,7 @@ if(isset($_POST['submit'])){
                                         </div>
                                     </div>
                                 </div>
-                                <input type="submit" name="submit"/>
+                                <input type="submit" name="submit" class="fr__btn"/>
                             </form>
                         </div>
                     </div>

@@ -65,8 +65,7 @@
   width: 45px;
   z-index: 200;
 }
-#scrollUp:hover {
-}
+
 
 @-webkit-keyframes scroll-ani-to-top {
   0% {
