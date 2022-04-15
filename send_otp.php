@@ -25,7 +25,7 @@ if($type=='email'){
 	$mail->SMTPSecure="tls";
 	$mail->SMTPAuth=true;
 	$mail->Username="mak1311178@gmail.com";
-	$mail->Password="A@mir13111";
+	$mail->Password="A@mir1311178";
 	$mail->SetFrom("mak1311178@gmail.com");
 	$mail->addAddress("$email");
 	$mail->IsHTML(true);

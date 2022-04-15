@@ -591,7 +591,9 @@ function SentInvoice($con,$order_id){
                                         </td>
                                     </tr>';
                                     }
-                                    $total_price = $total_price-$coupon_value;
+
+                                    $total_price = $total_price - $coupon_value;
+                                    
                                     $html.='<tr>
                                     <td width="80%" class="purchase_footer" valign="middle">
                                         <p class="f-fallback purchase_total purchase_total--label">Total</p>
