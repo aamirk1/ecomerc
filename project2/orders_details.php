@@ -1,6 +1,9 @@
 <?php
 require('header.inc.php');
 $order_id=get_safe_value($con,$_GET['id']);
+$coupon_details=mysqli_fetch_assoc(mysqli_query($con,"select coupon_value,coupon_code from `order` where id='$order_id'"));
+$coupon_value=$coupon_details['coupon_value'];
+$coupon_code=$coupon_details['coupon_code'];
 if(isset($_POST['update_order_status'])){
 	$update_order_status=$_POST['update_order_status'];
 	mysqli_query($con,"update `order` set order_status='$update_order_status' where id='$order_id'");
@@ -40,11 +43,23 @@ if(isset($_POST['update_order_status'])){
 										<td class="product-price"> <?php echo $row['price']?></td>
 										<td class="product-price"> <?php echo $row['qty']*$row['price']?></td>
 									</tr>
-									<?php } ?>
+									<?php } 
+                                    if($coupon_value!=''){
+                                    ?>
+                                    <tr>
+                                        <td colspan="3-name"></td>
+                                        <td class="product-name"> Coupon Value</td>
+                                        <td class="product-name"> <?php 
+										echo $coupon_value."($coupon_code)"
+										?></td>
+                                    </tr>
+                                    <?php } ?>
 									<tr>
 										<td colspan="3-name"></td>
 										<td class="product-name">Total Price</td>
-										<td class="product-price"> <?php echo $total_price?></td>
+										<td class="product-price"><?php 
+                                        echo $total_price - $coupon_value;
+                                        ?></td>
 									</tr>
 								</tbody>
 							</table>

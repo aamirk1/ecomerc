@@ -160,7 +160,7 @@ if($mypage=='product.php'){
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                    <a class="dropdown-item" href="my_order.php">&nbsp;&nbsp;Order </a>
                                                    <a class="dropdown-item" href="profile.php">&nbsp;&nbsp;Profile </a>
-                                                   <div class="dropdown-divider"></div>
+                                                   <a class="dropdown-item" href="http://localhost/masav/project2/login.php">&nbsp;&nbsp;Admin Login </a>
                                                    <a class="dropdown-item" href="logout.php">&nbsp;&nbsp;Logout </a>
                                                 </div>
                                              </li>

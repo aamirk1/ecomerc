@@ -34,7 +34,7 @@ require('header.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">our address</h2>
-                                <p>666 5th Ave New York, NY, United </p>
+                                <p>Maharashtra Mumbai 400003 </p>
                             </div>
                         </div>
                         <div class="address">
@@ -43,7 +43,9 @@ require('header.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">openning hour</h2>
-                                <p>666 5th Ave New York, NY, United </p>
+                                <p>08am to 10pm</p>
+
+                                <p>Maharashtra Mumbai 400003 </p>
                             </div>
                         </div>
 
@@ -53,7 +55,7 @@ require('header.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">Phone Number</h2>
-                                <p>123-6586-587456</p>
+                                <p>+91-9561321697</p>
                             </div>
                         </div>
                     </div>      

@@ -9,6 +9,8 @@ if(!$_SESSION['ADMIN_LOGIN']){
     }
 }
 $order_id=get_safe_value($con,$_GET['id']);
+$coupon_details=mysqli_fetch_assoc(mysqli_query($con,"select coupon_value from `order` where id='$order_id'"));
+$coupon_value=$coupon_details['coupon_value'];
 $css=file_get_contents('css/bootstrap.min.css');
 $css.=file_get_contents('style.css');
 
@@ -17,7 +19,6 @@ $html='<div class="wishlist-table table-responsive">
         <thead>
             <tr>
                 <th class="product-thumbnail">Product Name</th>
-                <th class="product-thumbnail">Product Image</th>
                 <th class="product-name">Qty</th>
                 <th class="product-name">Price</th>
                 <th class="product-name">Total Price</th>
@@ -41,14 +42,23 @@ $html='<div class="wishlist-table table-responsive">
             $pp=$row['qty']*$row['price'];
             $html.='<tr>
                 <td class="product-name"> '.$row['name'].' </td>
-                <td class="product-name"> <img src="'.PRODUCT_IMAGE_SITE_PATH.$row['image'].'"></td>
                 <td class="product-name"> '.$row['qty'].'</td>
                 <td class="product-name"> '.$row['price'].'</td>
                 <td class="product-name"> '.$pp.'</td>
             </tr>';
         }   
+
+        if($coupon_value!=''){
+            $html.='<tr>
+                <td colspan="2"></td>
+                <td class="product-name"> Coupon Value</td>
+                <td class="product-name"> '.$coupon_value.' </td>
+            
+            </tr>';
+        }
+        $total_price=$total_price-$coupon_value;
         $html.='<tr>
-            <td colspan="3"></td>
+            <td colspan="2"></td>
             <td class="product-name"> Total Price</td>
             <td class="product-name"> '.$total_price.' </td>
         </tr>';

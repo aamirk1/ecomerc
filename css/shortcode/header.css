@@ -261,7 +261,7 @@ nav.off__canvars--menu ul li ul li a:hover {
     font-size: 19px;
     margin-right: 20px;
     padding-right: 20px;
-    /*position: relative;*/
+    position: relative;
 }
 .header__account a::before {
     background: #898989 none repeat scroll 0 0;
@@ -273,6 +273,16 @@ nav.off__canvars--menu ul li ul li a:hover {
     width: 2px;
 }
 
+
+.navbar-nav>li>.dropdown-menu a::before {
+  /*background: red none repeat scroll 0 0;
+  content: "";
+  height: 15px;
+  position: absolute;
+  right: 0;
+  top: 50;*/
+  width: 0px;
+}
 
 
 /*-----------------------------------------
