@@ -73,6 +73,7 @@ $coupon_value=$coupon_details['coupon_value'];
                                         <td class="product-name"> <?php echo $coupon_value?></td>
                                     </tr>
                                     <?php } ?>
+                                    
                                     <tr>
                                         <td colspan="3-name"></td>
                                         <td class="product-name"> Total Price</td>

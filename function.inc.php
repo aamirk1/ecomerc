@@ -608,7 +608,7 @@ function SentInvoice($con,$order_id){
                             </table>
                             <p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="{{support_url}}">support team</a> for help.</p>
                             <p>Cheers,
-                            <br>The <h1>Masav</h1> Team</p>
+                            <br>The Masav</h1> Team</p>
                           
                             
                         </div>
@@ -622,7 +622,7 @@ function SentInvoice($con,$order_id){
                     <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                     <tr>
                         <td class="content-cell" align="center">
-                        <p class="f-fallback sub align-center">&copy; 2022 <h1>Masav</h1>. All rights reserved.</p>
+                        <p class="f-fallback sub align-center">&copy; 2022 Masav. All rights reserved.</p>
                         <p class="f-fallback sub align-center">
                             <br>Mumbai, Maharashtra 401209.
                         </p>
