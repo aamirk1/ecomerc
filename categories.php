@@ -8,10 +8,10 @@ if(!isset($_GET['id']) && $_GET['id']!=''){
     <?php
    
 }
-$cat_id=mysqli_real_escape_string($con,$_GET['id']);
+$cat_id=get_safe_value($con,$_GET['id']);
 $sub_categories='';
 if(isset($_GET['sub_categories'])){
-    $sub_categories=mysqli_real_escape_string($con,$_GET['sub_categories']);
+    $sub_categories=get_safe_value($con,$_GET['sub_categories']);
 }
 $price_high_selected="";
 $price_low_selected="";
@@ -19,7 +19,7 @@ $new_selected="";
 $old_selected="";
 
 if(isset($_GET['sort'])){
-    $sort=mysqli_real_escape_string($con,$_GET['sort']);
+    $sort=get_safe_value($con,$_GET['sort']);
     if($sort=="price_high"){
         $sort_order=" order by product.price desc";
         $price_high_selected="selected";

@@ -56,6 +56,9 @@ $html='<div class="wishlist-table table-responsive">
             
             </tr>';
         }
+        if($coupon_value==''){
+            $coupon_value=0;
+        }
         $total_price = $total_price - $coupon_value;
         $html.='<tr>
             <td colspan="2"></td>

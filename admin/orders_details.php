@@ -1,5 +1,6 @@
 <?php
 require('header.inc.php');
+isAdmin();
 $order_id=get_safe_value($con,$_GET['id']);
 $coupon_details=mysqli_fetch_assoc(mysqli_query($con,"select coupon_value,coupon_code from `order` where id='$order_id'"));
 $coupon_value=$coupon_details['coupon_value'];
@@ -7,6 +8,9 @@ $coupon_code=$coupon_details['coupon_code'];
 if(isset($_POST['update_order_status'])){
 	$update_order_status=$_POST['update_order_status'];
 	mysqli_query($con,"update `order` set order_status='$update_order_status' where id='$order_id'");
+}
+if($coupon_value==''){
+    $coupon_value=0;
 }
 ?>
 <div class="content pb-0">

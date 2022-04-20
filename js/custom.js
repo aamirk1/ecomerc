@@ -50,6 +50,7 @@ function user_register(){
             type:'post',
             data:'name='+name+'&email='+email+'&mobile='+mobile+'&password='+password,
             success:function(result){
+                result=result.trim();
                 if(result=='email_present'){
                     jQuery('#email_error').html('Email id already present')
                 }
@@ -78,6 +79,7 @@ function user_login(){
             type:'post',
             data:'&email='+email+'&password='+password,
             success:function(result){
+                result=result.trim();
                 if(result=='wrong'){
                     jQuery('.login_msg p').html('Please Enter Valid Details');
                 }
@@ -101,6 +103,7 @@ function manage_cart(pid,type){
         type:'post',
         data:'pid='+pid+'&qty='+qty+'&type='+type,
         success:function(result){
+            result=result.trim();
             if(type=='update' || type=='remove'){
                 window.location.href=window.location.href;
             }
@@ -125,6 +128,7 @@ function wishlist_manage(pid,type){
         type:'post',
         data:'pid='+pid+'&type='+type,
         success:function(result){
+            result=result.trim();
             if(result=='unlogin'){
                 window.location.href='login.php';
             }else{

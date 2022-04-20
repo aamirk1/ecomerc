@@ -1,5 +1,14 @@
 <?php
 require('header.inc.php');
+
+$condition='';
+$condition1='';
+if($_SESSION['ADMIN_ROLE']==1){
+	$condition=" and product.added_by='".$_SESSION['ADMIN_ID']."'"; 
+	$condition1=" and added_by='".$_SESSION['ADMIN_ID']."'"; 
+}
+
+
 $categories_id='';
 $name='';
 $mrp='';
@@ -19,7 +28,7 @@ $image_required='required';
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$image_required='';
 	$id=get_safe_value($con,$_GET['id']);
-	$res=mysqli_query($con,"select * from product where id='$id'");
+	$res=mysqli_query($con,"select * from product where id='$id' $condition1");
 	$check=mysqli_num_rows($res);
 	if($check>0){
 		$row=mysqli_fetch_assoc($res);
@@ -89,7 +98,7 @@ if(isset($_POST['submit'])){
 		}else{
 			$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 			move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
-			mysqli_query($con,"insert into product(categories_id,name,mrp,price,qty,short_decs,description,meta_title,meta_desc,meta_keyword,status,image,best_seller,sub_categories_id) values('$categories_id','$name','$mrp','$price','$qty','$short_decs','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image','$best_seller','$sub_categories_id')");
+			mysqli_query($con,"insert into product(categories_id,name,mrp,price,qty,short_decs,description,meta_title,meta_desc,meta_keyword,status,image,best_seller,sub_categories_id,added_by) values('$categories_id','$name','$mrp','$price','$qty','$short_decs','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image','$best_seller','$sub_categories_id','".$_SESSION['ADMIN_ID']."')");
 		}
 		header('location:product.php');
 		die();

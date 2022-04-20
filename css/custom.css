@@ -21,3 +21,11 @@
     font-size: 20px;
     font-weight: bold;
 }
+#social_share_box{
+    margin-top: 20px;
+    width: 100px;
+}
+#social_share_box img{
+    width: 24px;
+    margin-left: 5px;
+}

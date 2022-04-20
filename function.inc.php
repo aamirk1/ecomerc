@@ -12,7 +12,7 @@ function prx($arr){
 function get_safe_value($con,$str){
     if($str!=''){
         $str=trim($str);
-        return mysqli_real_escape_string($con,$str);
+        return strip_tags(mysqli_real_escape_string($con,$str));
     }
 }
 
@@ -77,7 +77,9 @@ function SentInvoice($con,$order_id){
 
     $coupon_details=mysqli_fetch_assoc(mysqli_query($con,"select coupon_value from `order` where id='$order_id'"));
     $coupon_value=$coupon_details['coupon_value'];
-
+    if($coupon_value==''){
+        $coupon_value=0;
+    }
     $total_price=0;
 
 
@@ -555,7 +557,7 @@ function SentInvoice($con,$order_id){
                             <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td>
-                                <h3>'.$user_order['id'].'.</h3>
+                                <h3>Order ID:.'.$user_order['id'].'</h3>
                                 </td>
                                 <td>
                                 <h3 class="align-right">'.$user_order['added_on'].'.</h3>
@@ -581,7 +583,7 @@ function SentInvoice($con,$order_id){
                                         <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">'.$pp.'</span></td>
                                     </tr>';
                                     }
-                                    if($coupon_value!=''){
+                                    if($coupon_value!=""){
                                         $html.='<tr>
                                         <td width="80%" class="purchase_footer" valign="middle">
                                         <p class="f-fallback purchase_total purchase_total--label">Coupon Value</p>
@@ -592,7 +594,7 @@ function SentInvoice($con,$order_id){
                                     </tr>';
                                     }
 
-                                    $total_price = $total_price - $coupon_value;
+                                    $total_price = $total_price-$coupon_value;
                                     
                                     $html.='<tr>
                                     <td width="80%" class="purchase_footer" valign="middle">

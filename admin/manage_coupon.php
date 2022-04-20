@@ -1,5 +1,6 @@
 <?php
 require('header.inc.php');
+isAdmin();
 $coupon_code='';
 $coupon_value='';
 $coupon_type='';

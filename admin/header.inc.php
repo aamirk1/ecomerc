@@ -33,17 +33,30 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                <ul class="nav navbar-nav">
                   <li class="menu-title">Menu</li>
                   <li class="menu-item-has-children dropdown">
+                     <a href="product.php" > Product</a>
+                  </li>
+				      <li class="menu-item-has-children dropdown">
+                  <?php if($_SESSION['ADMIN_ROLE']==1){
+                     echo '<a href="order_vendor.php" > Order</a>';
+                  }else{
+                     echo '<a href="orders.php" > Order</a>';
+                  }
+                  ?>
+                     
+                  </li>
+                  <?php if($_SESSION['ADMIN_ROLE']!=1){?>
+                  
+                  <li class="menu-item-has-children dropdown">
+                     <a href="vendor.php" > Vendor Management</a>
+                  </li>
+
+                  <li class="menu-item-has-children dropdown">
                      <a href="categories.php" > Categories</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
                      <a href="sub_categories.php" > Sub Categories</a>
                   </li>
-                  <li class="menu-item-has-children dropdown">
-                     <a href="product.php" > Product</a>
-                  </li>
-				      <li class="menu-item-has-children dropdown">
-                     <a href="orders.php" > Order</a>
-                  </li>
+                  
                   <li class="menu-item-has-children dropdown">
                      <a href="users.php" > User</a>
                   </li>
@@ -53,6 +66,7 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                   <li class="menu-item-has-children dropdown">
                      <a href="contact_us.php" > Contact Us</a>
                   </li>
+                  <?php } ?>
                </ul>
             </div>
          </nav>
@@ -69,7 +83,7 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
             <div class="top-right">
                <div class="header-menu">
                   <div class="user-area dropdown float-right">
-                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome Admin</a>
+                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome <?php echo $_SESSION['ADMIN_USERNAME'] ?></a>
                      <div class="user-menu dropdown-menu">
                         <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i>Logout</a>
                      </div>

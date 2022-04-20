@@ -1,5 +1,6 @@
 <?php
 require('header.inc.php');
+isAdmin();
 $categories='';
 $msg='';
 $sub_categories='';

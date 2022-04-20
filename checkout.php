@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
         
     }
     unset($_SESSION['cart']);
-    SentInvoice($con,$order_id);
+    //SentInvoice($con,$order_id);
     ?>
     <script>
         window.location.href='thank_you.php';

@@ -13,6 +13,10 @@ if(!isset($_SESSION['USER_LOGIN'])){
 $order_id=get_safe_value($con,$_GET['id']);
 $coupon_details=mysqli_fetch_assoc(mysqli_query($con,"select coupon_value from `order` where id='$order_id'"));
 $coupon_value=$coupon_details['coupon_value'];
+if($coupon_value==''){
+    $coupon_value=0;
+}
+$total_price=0;
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/44.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -65,7 +69,7 @@ $coupon_value=$coupon_details['coupon_value'];
                                         <td class="product-name"> <?php echo $row['qty']*$row['price']?></td>
                                     </tr>
                                     <?php } 
-                                    if($coupon_value!=''){
+                                    if($coupon_value!=""){
                                     ?>
                                     <tr>
                                         <td colspan="3-name"></td>

@@ -11,25 +11,28 @@ $productSoldQtyByProductId=productSoldQtyByProductId($con,$pid);
 $productQty=productQty($con,$pid);
 $pending_qty=$productQty-$productSoldQtyByProductId;
 
-if($qty>$pending_qty){
-    echo 'Not_available';
-    die();
+if($qty<1){
+
+}else{
+    if($qty>$pending_qty){
+        echo 'Not_available';
+        die();
+    }
+
+    $obj=new add_to_cart();
+
+    if($type=='add'){
+        $obj->addProduct($pid,$qty);
+    }
+
+    if($type=='remove'){
+        $obj->removeProduct($pid);
+    }
+
+    if($type=='update'){
+        $obj->updateProduct($pid,$qty);
+    }
 }
-
-$obj=new add_to_cart();
-
-if($type=='add'){
-    $obj->addProduct($pid,$qty);
-}
-
-if($type=='remove'){
-    $obj->removeProduct($pid);
-}
-
-if($type=='update'){
-    $obj->updateProduct($pid,$qty);
-}
-
 
 echo $obj->totalProduct();
 ?>
