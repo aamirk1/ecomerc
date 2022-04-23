@@ -47,6 +47,10 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                   <?php if($_SESSION['ADMIN_ROLE']!=1){?>
                   
                   <li class="menu-item-has-children dropdown">
+                     <a href="banner.php" > Banner</a>
+                  </li>
+
+                  <li class="menu-item-has-children dropdown">
                      <a href="vendor.php" > Vendor Management</a>
                   </li>
 

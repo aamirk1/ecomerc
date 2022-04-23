@@ -1,40 +1,24 @@
-<?php require('header.php')?>
-<div class="body__overlay"></div>
-        
-<div class="slider__container slider--one bg__cat--3">
-    <div class="slide__container slider__activation__wrap owl-carousel">
-        <div class="single__slide animation__style01 slider__fixed--height">
-            <div class="container">
-                    
-                    <div class="col-lg-6 col-sm-5 col-xs-12 col-md-5">
-                        <div class="slide__thumb">
-                            <img src="images/slider/fornt-img/sl2.png" alt="slider images">
-                        </div>
-                    </div>
-               
-            </div>
-        </div>
-        <div class="single__slide animation__style01 slider__fixed--height">
-            <div class="container">
-                    <div class="col-lg-6 col-sm-5 col-xs-14 col-md-5">
-                        <div class="slide__thumb">
-                            <img src="images/slider/fornt-img/b42.jpg" alt="slider images">
-                        </div>
-                    </div>
-            </div>
-        </div>
+<?php require('header.php');
 
-        <div class="single__slide animation__style01 slider__fixed--height">
-            <div class="container">
-                    <div class="col-lg-6 col-sm-5 col-xs-12 col-md-5">
-                        <div class="slide__thumb">
-                            <img src="images/slider/fornt-img/b43.png" alt="slider images">
-                        </div>
+$resBanner=mysqli_query($con,"select * from banner where status='1' order by order_no asc")
+
+?>
+<div class="body__overlay"></div>
+    <?php if(mysqli_num_rows($resBanner)>0){?>        
+    <div class="slider__container slider--one bg__cat--3">
+        <div class="slide__container slider__activation__wrap owl-carousel">
+            <?php while($rowBanner=mysqli_fetch_assoc($resBanner)){?>
+            <div class="single__slide animation__style01 slider__fixed--height">
+                <div class="container">
+                    <div class="slide__thumb">
+                        <a href="<?php echo $rowBanner['btn_link']?>"><img src="<?php echo BANNER_IMAGE_SITE_PATH.$rowBanner['image']?>"></a>
                     </div>
+                </div>
             </div>
+            <?php } ?>
         </div>
     </div>
-</div>
+    <?php } ?>
 <section class="htc__category__area ptb--100">
     <div class="container">
         <div class="row">
@@ -46,7 +30,7 @@
         </div>
         <div class="htc__product__container">
             <div class="row">
-                <div class="product__list clearfix mt--30">
+                <div class="product__list clearfix mt--10">
                     <?php
                     $get_product=get_product($con,4);
                     foreach($get_product as $list){
@@ -89,7 +73,7 @@
             </div>
         </div>
         <div class="row">
-        <div class="product__list clearfix mt--30">
+        <div class="product__list clearfix mt--10">
             <?php
             $get_product=get_product($con,4,'','','','','yes');
             foreach($get_product as $list){

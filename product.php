@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 require('header.php');
 $product_id=mysqli_real_escape_string($con,$_GET['id']);
 $get_product=get_product($con,'','',$product_id);
@@ -92,11 +93,15 @@ $get_product=get_product($con,'','',$product_id);
                                 if($cart_show!=''){
                                     ?>
                                 <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Add to cart</a>
+
+                                <a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
                                     <?php } ?>
                             <div id="social_share_box">
-                                <a href=""><img src="images\icons\WhatsApp.png"></a>
-                                <a href=""><img src="images\icons\facebook.png"></a>
-                                <a href=""><img src="images\icons\twitter.png"></a>
+                                <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
+
+                                <a target="_blank" href="https://facebook.com/share.php?u=<?php echo $meta_url ?>"><img src="images\icons\facebook.png"></a>
+
+                                <a target="_blank" href="https://twitter.com/share?text=<?php echo $get_product['0']['name']?>&url=<?php echo $meta_url ?>"><img src="images\icons\twitter.png"></a>
                                 
                             </div>
                             </div>
@@ -130,7 +135,77 @@ $get_product=get_product($con,'','',$product_id);
                 </div>
             </div>
         </section>
-        
 
-<?php require('footer.inc.php')?>
+        <?php
+        if(isset($_COOKIE['recently_viewed'])){
+            $arrRecentView=unserialize($_COOKIE['recently_viewed']);
+            $countRecentView=count($arrRecentView);
+            $countStartRecentView=$countRecentView-4;
+            if($countRecentView>4){
+                $arrRecentView=array_slice($arrRecentView,$countStartRecentView,4);
+            }
+            $recentViewId=implode(",",$arrRecentView);
+            $res=mysqli_query($con,"select * from product where id IN ($recentViewId)");
+            
+            
+        ?>
+
+        <section class="htc__produc__decription bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 style="font-size: 20px;font-weight: bold;margin-bottom: 20px;">Recently Viewed</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ht__pro__details__content">
+                            <div class="row">                                
+                            <?php while($list=mysqli_fetch_assoc($res)){ ?>
+                                <div class="col-xs-3">
+                                    <div class="recent">
+                                        <div class="ht__cat__thumb">
+                                            <a href="product.php?id=<?php echo $list['id']?>">
+                                                <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$list['image']?>" alt="product images">
+                                            </a>
+                                        </div>
+                                        <div class="fr__hover__info">
+                                            <ul class="product__action">
+                                                <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id']?>','add')"><i class="icon-heart icons"></i></a></li>
+                                                <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id']?>','add')"><i class="icon-handbag icons"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="fr__product__inner">
+                                            <h4><a href="product-details.html"><?php echo $list['name']?></a></h4>
+                                            <ul class="fr__pro__prize">
+                                                <li class="old__prize"><?php echo $list['mrp']?></li>
+                                                <li><?php echo $list['price']?></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                                                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <?php 
+            $arrRec=unserialize($_COOKIE['recently_viewed']);
+            if(($key=array_search($product_id,$arrRec))!==false){
+                unset($arrRec[$key]);
+            }
+            $arrRec[]=$product_id;
+            setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
+    
+        }else{
+            $arrRec[]=$product_id;
+            setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
+        }
+        ?>
+<?php 
+require('footer.inc.php');
+ob_flush();
+?>
         

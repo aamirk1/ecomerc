@@ -92,7 +92,7 @@ function user_login(){
 }
 
 
-function manage_cart(pid,type){
+function manage_cart(pid,type,is_checkout){
     if(type=='update'){
         var qty=jQuery("#"+pid+"qty").val();
     }else{

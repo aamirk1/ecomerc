@@ -1,22 +1,5 @@
 
 
-/*-------------------------------------
-[  Table of contents  ]
----------------------------------------
-  01. Avoid `console` errors in browsers that lack a console.
-  02. Scrollup jquery   
-  03. WOW / scrolling animation 
-  04. Isotope PACKAGED v2.2.0
-  05. MeanMenu jquery Menu Plugin / Mobile Menu
-  06. Scrollup jquery
-  07. jQuery UI - v1.11.4 - 2015-12-02
-
-
-
-------------------------------------
-[ End table content ]
------------------------------------*/
-
 /*-------------------------------------------------------------
   01. Avoid `console` errors in browsers that lack a console.
 ---------------------------------------------------------------*/

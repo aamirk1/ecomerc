@@ -30,8 +30,8 @@
 .slider__fixed--height {
   align-items: center;
   display: flex;
-  height: 250px;
-  margin-right: 6%;
+  height: 290px;
+  margin-right: 3%;
 }
 .slider--one .slide {
     align-items: center;

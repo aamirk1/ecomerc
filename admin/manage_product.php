@@ -79,8 +79,16 @@ if(isset($_POST['submit'])){
 		}
 	}
 
-	if($_FILES['image']['type']!='image/png' && $_FILES['image']['type']!='image/jpg' && $_FILES['image']['type']!='image/jpeg'){
-		$msg="Please Select Only png,jpg and jpeg image formate";
+	if(isset($_GET['id']) && $_GET['id']==0){
+		if($_FILES['image']['type']!='image/png' && $_FILES['image']['type']!='image/jpg' && $_FILES['image']['type']!='image/jpeg'){
+			$msg="Please Select Only png,jpg and jpeg image formate";
+		}
+	}else{
+		if($_FILES['image']['type']!=''){
+				if($_FILES['image']['type']!='image/png' && $_FILES['image']['type']!='image/jpg' && $_FILES['image']['type']!='image/jpeg'){
+				$msg="Please select only png,jpg and jpeg image formate";
+			}
+		}
 	}
 	
 	if($msg==''){
@@ -181,6 +189,11 @@ if(isset($_POST['submit'])){
 						<div class="form-group">
 							<label for="categories" class="form-control-label">Product Image</label>
 							<input type="file" name="image" class="form-control" <?php echo $image_required?>>
+							<?php
+							if($image!=''){
+								echo "<a target='_blank' href='".PRODUCT_IMAGE_SERVER_PATH.$image."'><img width='150px' src='".PRODUCT_IMAGE_SERVER_PATH.$image."'/></a>";
+							}
+							?>
 						</div>
 
 						<div class="form-group">
