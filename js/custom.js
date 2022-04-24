@@ -111,6 +111,10 @@ function manage_cart(pid,type,is_checkout){
                 alert('Qty Not Available');
             }else{
                 jQuery('.htc__qua').html(result);
+                if(is_checkout=='yes'){
+                    window.location.href='checkout.php'
+                }
+                
             }
         }
     });
@@ -138,3 +142,4 @@ function wishlist_manage(pid,type){
         }
     });
 }
+

@@ -95,7 +95,7 @@ $get_product=get_product($con,'','',$product_id);
                                 <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Add to cart</a>
 
                                 <a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
-                                    <?php } ?>
+                                <?php } ?>
                             <div id="social_share_box">
                                 <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
 

@@ -64,7 +64,7 @@ if(isset($_POST['submit'])){
 	$meta_keyword=get_safe_value($con,$_POST['meta_keyword']);
 	$best_seller=get_safe_value($con,$_POST['best_seller']);
 
-	$res=mysqli_query($con,"select * from product where name='$name'");
+	$res=mysqli_query($con,"select product.* from product where product.name='$name' $condition1");
 	$check=mysqli_num_rows($res);
 	if($check>0){
 		if(isset($_GET['id']) && $_GET['id']!=''){
@@ -90,6 +90,15 @@ if(isset($_POST['submit'])){
 			}
 		}
 	}
+
+	if(isset($_FILES['product_images'])){
+		foreach ($_FILES['product_images']['type'] as $key=>$val){
+			if($_FILES['product_images']['type'][$key]!='image/png' && $_FILES['product_images']['type'][$key]!='image/jpg' && $_FILES['product_images']['type'][$key]!='image/jpeg'){
+				$msg="Please Select Only png,jpg and jpeg image formate";
+			}
+		}
+	}
+
 	
 	if($msg==''){
 		if(isset($_GET['id']) && $_GET['id']!=''){		
@@ -122,29 +131,33 @@ if(isset($_POST['submit'])){
 					<form method="post" enctype="multipart/form-data">
 					<div class="card-body card-block">
 						<div class="form-group">
-							<label for="categories" class=" form-control-label">Categories</label>
-							<select name="categories_id" id="categories_id" class="form-control" onchange="get_sub_cat('')" required>
-								<option>Select Category</option>
-								<?php
-								$res=mysqli_query($con,"select id,categories from categories order by categories asc");
-								while($row=mysqli_fetch_assoc($res)){
-									if($row['id']==$categories_id){
-										echo"<option selected value=".$row['id'].">".$row['categories']."</option>";
-									}else{
-										echo"<option value=".$row['id'].">".$row['categories']."</option>";
-									}
-									
-								}
-								?>
-							</select>
+							<div class="row">
+								<div class="col-lg-6">
+									<label for="categories" class=" form-control-label">Categories</label>
+									<select name="categories_id" id="categories_id" class="form-control" onchange="get_sub_cat('')" required>
+										<option>Select Category</option>
+										<?php
+										$res=mysqli_query($con,"select id,categories from categories order by categories asc");
+										while($row=mysqli_fetch_assoc($res)){
+											if($row['id']==$categories_id){
+												echo"<option selected value=".$row['id'].">".$row['categories']."</option>";
+											}else{
+												echo"<option value=".$row['id'].">".$row['categories']."</option>";
+											}
+											
+										}
+										?>
+									</select>
+								</div>
+								
+								<div class="col-lg-6">
+									<label for="categories" class=" form-control-label">Sub Categories</label>
+									<select name="sub_categories_id" id="sub_categories_id" class="form-control">
+										<option>Select Sub Category</option>
+									</select>									
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="categories" class=" form-control-label">Sub Categories</label>
-							<select name="sub_categories_id" id="sub_categories_id" class="form-control">
-							<option>Select Sub Category</option>
-							</select>
-						</div>
-
 
 						<div class="form-group">
 							<label for="categories" class="form-control-label">Product Name</label>
@@ -152,48 +165,60 @@ if(isset($_POST['submit'])){
 						</div>
 
 						<div class="form-group">
-							<label for="categories" class=" form-control-label">Best Seller</label>
-							<select name="best_seller" class="form-control" required>
-								<option value="">Select</option>
-								<?php
-								if($best_seller==1){
-									echo'<option value="1" selected>Yes</option>
-									<option value="0">No</option>';
-								}elseif($best_seller==0){
-									echo'<option value="1">Yes</option>
-									<option value="0" selected>No</option>';
-								}else{
-									echo'<option value="1">Yes</option>
-									<option value="0">No</option>';
-								}
-								?>
-							</select>
+							<div class="row">
+								<div class="col-lg-3">
+									<label for="categories" class=" form-control-label">Best Seller</label>
+									<select name="best_seller" class="form-control" required>
+										<option value="">Select</option>
+										<?php
+										if($best_seller==1){
+											echo'<option value="1" selected>Yes</option>
+											<option value="0">No</option>';
+										}elseif($best_seller==0){
+											echo'<option value="1">Yes</option>
+											<option value="0" selected>No</option>';
+										}else{
+											echo'<option value="1">Yes</option>
+											<option value="0">No</option>';
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product MRP</label>
+									<input type="text" name="mrp" placeholder="Enter product mrp" class="form-control" required value="<?php echo $mrp?>">
+								</div>
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product Price</label>
+									<input type="text" name="price" placeholder="Enter product Price" class="form-control" required value="<?php echo $price?>">
+								</div>
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product Qty</label>
+									<input type="text" name="qty" placeholder="Enter product qty" class="form-control" required value="<?php echo $qty?>">
+								</div>
+							</div>							
 						</div>
 
-
 						<div class="form-group">
-							<label for="categories" class="form-control-label">Product MRP</label>
-							<input type="text" name="mrp" placeholder="Enter product mrp" class="form-control" required value="<?php echo $mrp?>">
-						</div>
-
-						<div class="form-group">
-							<label for="categories" class="form-control-label">Product Price</label>
-							<input type="text" name="price" placeholder="Enter product Price" class="form-control" required value="<?php echo $price?>">
-						</div>
-
-						<div class="form-group">
-							<label for="categories" class="form-control-label">Product Qty</label>
-							<input type="text" name="qty" placeholder="Enter product qty" class="form-control" required value="<?php echo $qty?>">
-						</div>
-
-						<div class="form-group">
-							<label for="categories" class="form-control-label">Product Image</label>
-							<input type="file" name="image" class="form-control" <?php echo $image_required?>>
-							<?php
-							if($image!=''){
-								echo "<a target='_blank' href='".PRODUCT_IMAGE_SERVER_PATH.$image."'><img width='150px' src='".PRODUCT_IMAGE_SERVER_PATH.$image."'/></a>";
-							}
-							?>
+							<div class="row" id="image_box">
+								<div class="col-lg-10">
+									<label for="categories" class="form-control-label">Product Image</label>
+									<input type="file" name="image" class="form-control" <?php echo $image_required?>>
+									<?php
+									if($image!=''){
+										echo "<a target='_blank' href='".PRODUCT_IMAGE_SERVER_PATH.$image."'><img width='150px' src='".PRODUCT_IMAGE_SERVER_PATH.$image."'/></a>";
+									}
+									?>
+								</div>
+								<div class="col-lg-2">
+									<label for="categories" class="form-control-label"></label>
+									<button id="" type="button" class="btn btn-lg btn-info btn-block" onclick="add_more_images()">
+										<span id="payment-button-amount" name="submit">Add Image</span>
+									</button>
+								</div>
+							</div>
+							
+							
 						</div>
 
 						<div class="form-group">
@@ -243,6 +268,17 @@ if(isset($_POST['submit'])){
 					jQuery('#sub_categories_id').html(result);
 				}
 			})
+		}
+
+		var total_image=1;
+		function add_more_images(){
+			total_image++;
+			var html ='<div class="col-lg-6" style="margin-top:20px;" id="add_image_box_'+total_image+'"><label for="categories" class="form-control-label">Image</label><input type="file" name="product_images[]" class="form-control" required><button type="button" class="btn btn-lg btn-danger btn-block" onclick=remove_image("'+total_image+'")><span id="payment-button-amount" name="submit">Remove</span></button></div>';
+			jQuery('#image_box').append(html);
+		}
+		function remove_image(id){
+			jQuery('#add_image_box_'+id).remove();
+			
 		}
 		
 	</script>

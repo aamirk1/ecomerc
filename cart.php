@@ -10,7 +10,7 @@ require('header.php');
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="index.php">Home</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active">shopping cart</span>
+                            <span class="breadcrumb-item active">Shopping Cart</span>
                         </nav>
                     </div>
                 </div>
