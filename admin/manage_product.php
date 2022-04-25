@@ -22,9 +22,16 @@ $meta_desc='';
 $meta_keyword='';
 $best_seller='';
 $sub_categories_id='';
-
+$multipleImageArr=[];
 $msg='';
+
 $image_required='required';
+
+if(isset($_GET['pi']) && $_GET['pi']>0){
+	$pi=get_safe_value($con,$_GET['pi']);
+	$delete_sql="delete from product_images where id='$pi'";
+	mysqli_query($con,$delete_sql);
+}   
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$image_required='';
 	$id=get_safe_value($con,$_GET['id']);
@@ -44,6 +51,17 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 		$meta_desc=$row['meta_desc'];
 		$meta_keyword=$row['meta_keyword'];
 		$best_seller=$row['best_seller'];
+		$image=$row['image'];
+
+		$resMultipleImage=mysqli_query($con,"select  id,product_image from product_images where product_id='$id'");
+		if(mysqli_num_rows($resMultipleImage)>0){
+			$jj=0;
+			while($rowMultipleImage=mysqli_fetch_assoc($resMultipleImage)){
+				$multipleImageArr[$jj]['product_image']=$rowMultipleImage['product_image'];
+				$multipleImageArr[$jj]['id']=$rowMultipleImage['id'];
+				$jj++;
+			}
+		}
 	}else{
 		header('location:categories.php');
 		die();
@@ -93,8 +111,10 @@ if(isset($_POST['submit'])){
 
 	if(isset($_FILES['product_images'])){
 		foreach ($_FILES['product_images']['type'] as $key=>$val){
-			if($_FILES['product_images']['type'][$key]!='image/png' && $_FILES['product_images']['type'][$key]!='image/jpg' && $_FILES['product_images']['type'][$key]!='image/jpeg'){
-				$msg="Please Select Only png,jpg and jpeg image formate";
+			if($_FILES['product_images']['type'][$key]!=''){
+				if($_FILES['product_images']['type'][$key]!='image/png' && $_FILES['product_images']['type'][$key]!='image/jpg' && $_FILES['product_images']['type'][$key]!='image/jpeg'){
+					$msg="Please Select Only png,jpg and jpeg image formate";
+				}
 			}
 		}
 	}
@@ -116,7 +136,40 @@ if(isset($_POST['submit'])){
 			$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 			move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
 			mysqli_query($con,"insert into product(categories_id,name,mrp,price,qty,short_decs,description,meta_title,meta_desc,meta_keyword,status,image,best_seller,sub_categories_id,added_by) values('$categories_id','$name','$mrp','$price','$qty','$short_decs','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image','$best_seller','$sub_categories_id','".$_SESSION['ADMIN_ID']."')");
+			$id=mysqli_insert_id($con);
 		}
+
+
+		if(isset($_GET['id']) && $_GET['id']!=''){
+			foreach ($_FILES['product_images']['name'] as $key=>$val){
+				if($_FILES['product_images']['name'][$key]!=''){
+					if(isset($_POST['product_images_id'][$key])){
+						
+						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
+						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
+		
+						mysqli_query($con,"update product_images set product_image='$image' where id='".$_POST['product_images_id'][$key]."'");
+						
+					}else{
+						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
+						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
+		
+						mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");	
+					}
+				}
+			}
+
+		}else{
+			if(isset($_FILES['product_images']['name'])){
+				foreach ($_FILES['product_images']['name'] as $key=>$val){
+					$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
+					move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
+	
+					mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");
+				}
+			}
+		}
+
 		header('location:product.php');
 		die();
 	}
@@ -206,7 +259,7 @@ if(isset($_POST['submit'])){
 									<input type="file" name="image" class="form-control" <?php echo $image_required?>>
 									<?php
 									if($image!=''){
-										echo "<a target='_blank' href='".PRODUCT_IMAGE_SERVER_PATH.$image."'><img width='150px' src='".PRODUCT_IMAGE_SERVER_PATH.$image."'/></a>";
+										echo "<a target='_blank' href='".PRODUCT_IMAGE_SITE_PATH.$image."'><img width='150px' src='".PRODUCT_IMAGE_SITE_PATH.$image."'/></a>";
 									}
 									?>
 								</div>
@@ -216,6 +269,15 @@ if(isset($_POST['submit'])){
 										<span id="payment-button-amount" name="submit">Add Image</span>
 									</button>
 								</div>
+								<?php
+								if (isset($multipleImageArr[0])) {
+									foreach($multipleImageArr as $list){
+										echo'<div class="col-lg-6" style="margin-top:20px;" id="add_image_box_'.$list['id'].'"><label for="categories" class="form-control-label">Image</label><input type="file" name="product_images[]" class="form-control"><button type="button" class="btn btn-lg btn-danger btn-block" onclick=remove_image("'.$list['id'].'")><span id="payment-button-amount"><a href="manage_product.php?id='.$id.'&pi='.$list['id'].'" style="color:white;">Remove</a></span></button>';
+										echo "<a target='_blank' href='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_image']."'><img width='150px' src='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_image']."'/></a>";
+										echo'<input type="hidden" name="product_images_id[]" value="'.$list['id'].'"/></div>';
+									}
+								}
+								?>
 							</div>
 							
 							

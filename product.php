@@ -1,6 +1,31 @@
 <?php 
 ob_start();
 require('header.php');
+if(isset($_GET['id'])){
+    $product_id=mysqli_real_escape_string($con,$_GET['id']);
+    if($product_id>0){
+        $get_product=get_product($con,'','',$product_id);
+    }else{
+        ?>
+        <script>
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+    $resMultipleImages=mysqli_query($con,"select * from product_images where product_id='$product_id'");
+    $multipleImages=[];
+    if(mysqli_num_rows($resMultipleImages)>0){
+        while($rowMultipleImages=mysqli_fetch_assoc($resMultipleImages)){
+            $multipleImages[]=$rowMultipleImages['product_image'];
+        }
+    }
+}else{
+    ?>
+    <script>
+        window.location.href='index.php';
+    </script>
+    <?php
+}
 $product_id=mysqli_real_escape_string($con,$_GET['id']);
 $get_product=get_product($con,'','',$product_id);
 ?>
@@ -35,6 +60,16 @@ $get_product=get_product($con,'','',$product_id);
                                         <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
                                             <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$get_product['0']['image']?>">
                                         </div>
+                                        <?php if(isset($multipleImages[0])){
+                                            ?>
+                                        <div id="multiple_images">
+                                            <?php
+                                            foreach ($multipleImages as $list){
+                                                echo "<img src='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list."' onclick=showMultipleImage('".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list."')>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 
@@ -204,6 +239,11 @@ $get_product=get_product($con,'','',$product_id);
             setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
         }
         ?>
+        <script>
+            function showMultipleImage(im){
+                jQuery('#img-tab-1').html("<img src='"+im+"'/>");
+            }
+        </script>
 <?php 
 require('footer.inc.php');
 ob_flush();
