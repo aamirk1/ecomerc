@@ -1,9 +1,5 @@
 <?php
-/**
- * Portuguese (European) PHPMailer language file: refer to English translation for definitive list
- * @package PHPMailer
- * @author Jonadabe <jonadabe@hotmail.com>
- */
+
 
 $PHPMAILER_LANG['authenticate']         = 'Erro do SMTP: Não foi possível realizar a autenticação.';
 $PHPMAILER_LANG['connect_host']         = 'Erro do SMTP: Não foi possível realizar ligação com o servidor SMTP.';

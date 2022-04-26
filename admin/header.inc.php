@@ -45,7 +45,9 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                      
                   </li>
                   <?php if($_SESSION['ADMIN_ROLE']!=1){?>
-                  
+                  <li class="menu-item-has-children dropdown">
+                     <a href="product_review.php" > Product Review</a>
+                  </li>
                   <li class="menu-item-has-children dropdown">
                      <a href="banner.php" > Banner</a>
                   </li>
@@ -70,6 +72,7 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                   <li class="menu-item-has-children dropdown">
                      <a href="contact_us.php" > Contact Us</a>
                   </li>
+                  
                   <?php } ?>
                </ul>
             </div>

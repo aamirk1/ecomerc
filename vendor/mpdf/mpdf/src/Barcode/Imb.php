@@ -2,35 +2,7 @@
 
 namespace Mpdf\Barcode;
 
-/**
- * IMB - Intelligent Mail Barcode - Onecode - USPS-B-3200
- *
- * (requires PHP bcmath extension)
- *
- * Intelligent Mail barcode is a 65-bar code for use on mail in the United States.
- * The fields are described as follows:
- *
- *   - The Barcode Identifier shall be assigned by USPS to encode the presort identification that is currently
- *     printed in human readable form on the optional endorsement line (OEL) as well as for future USPS use. This
- *     shall be two digits, with the second digit in the range of 0-4. The allowable encoding ranges shall be 00-04,
- *     10-14, 20-24, 30-34, 40-44, 50-54, 60-64, 70-74, 80-84, and 90-94.
- *
- *   - The Service Type Identifier shall be assigned by USPS for any combination of services requested on the mailpiece.
- *     The allowable encoding range shall be 000-999. Each 3-digit value shall correspond to a particular mail class
- *     with a particular combination of service(s). Each service program, such as OneCode Confirm and OneCode ACS,
- *     shall provide the list of Service Type Identifier values.
- *
- *   - The Mailer or Customer Identifier shall be assigned by USPS as a unique, 6 or 9 digit number that identifies
- *     a business entity. The allowable encoding range for the 6 digit Mailer ID shall be 000000- 899999, while the
- *     allowable encoding range for the 9 digit Mailer ID shall be 900000000-999999999.
- *
- *   - The Serial or Sequence Number shall be assigned by the mailer for uniquely identifying and tracking mailpieces.
- *     The allowable encoding range shall be 000000000-999999999 when used with a 6 digit Mailer ID and 000000-999999
- *     when used with a 9 digit Mailer ID. e. The Delivery Point ZIP Code shall be assigned by the mailer for routing
- *     the mailpiece. This shall replace POSTNET for routing the mailpiece to its final delivery point. The length may
- *     be 0, 5, 9, or 11 digits. The allowable encoding ranges shall be no ZIP Code, 00000-99999,  000000000-999999999,
- *     and 00000000000-99999999999.
- */
+
 class Imb extends \Mpdf\Barcode\AbstractBarcode implements \Mpdf\Barcode\BarcodeInterface
 {
 

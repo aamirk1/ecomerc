@@ -2,16 +2,6 @@
 
 namespace Mpdf\Gif;
 
-/**
- * GIF Util - (C) 2003 Yamasoft (S/C)
- *
- * All Rights Reserved
- *
- * This file can be freely copied, distributed, modified, updated by anyone under the only
- * condition to leave the original address (Yamasoft, http://www.yamasoft.com) and this header.
- *
- * @link http://www.yamasoft.com
- */
 class Image
 {
 

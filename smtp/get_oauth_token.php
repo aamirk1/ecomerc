@@ -1,17 +1,5 @@
 <?php
-/**
- * Get an OAuth2 token from Google.
- * * Install this script on your server so that it's accessible
- * as [https/http]://<yourdomain>/<folder>/get_oauth_token.php
- * e.g.: http://localhost/phpmail/get_oauth_token.php
- * * Ensure dependencies are installed with 'composer install'
- * * Set up an app in your Google developer console
- * * Set the script address as the app's redirect URL
- * If no refresh token is obtained when running this file, revoke access to your app
- * using link: https://accounts.google.com/b/0/IssuedAuthSubTokens and run the script again.
- * This script requires PHP 5.4 or later
- * PHP Version 5.4
- */
+
 
 namespace League\OAuth2\Client\Provider;
 

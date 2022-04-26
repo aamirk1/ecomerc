@@ -93,6 +93,7 @@ function user_login(){
 
 
 function manage_cart(pid,type,is_checkout){
+    var is_error='';
     if(type=='update'){
         var qty=jQuery("#"+pid+"qty").val();
     }else{
@@ -108,13 +109,12 @@ function manage_cart(pid,type,is_checkout){
                 window.location.href=window.location.href;
             }
             if(result=='Not_available'){
-                alert('Qty Not Available');
+                alert('Quantity Not Available');
             }else{
                 jQuery('.htc__qua').html(result);
                 if(is_checkout=='yes'){
-                    window.location.href='checkout.php'
-                }
-                
+                    window.location.href='checkout.php';
+                }                
             }
         }
     });
@@ -142,4 +142,4 @@ function wishlist_manage(pid,type){
         }
     });
 }
-
+jQuery('.imageZoom').imgZoom();

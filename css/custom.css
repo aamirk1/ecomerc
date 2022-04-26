@@ -48,3 +48,19 @@
 #multiple_images img{
     width: 15%;
 }
+
+.review_heading{
+	font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+#review .comment-rating{
+    color:#c43b68;
+	font-weight:bold;   
+}
+
+.submit_review_hint{
+	font-size:16px;
+	color:#c43b68;
+}

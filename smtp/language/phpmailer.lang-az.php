@@ -1,9 +1,5 @@
 <?php
-/**
- * Azerbaijani PHPMailer language file: refer to English translation for definitive list
- * @package PHPMailer
- * @author @mirjalal
- */
+
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP xətası: Giriş uğursuz oldu.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP xətası: SMTP serverinə qoşulma uğursuz oldu.';

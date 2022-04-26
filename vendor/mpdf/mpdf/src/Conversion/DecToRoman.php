@@ -2,10 +2,6 @@
 
 namespace Mpdf\Conversion;
 
-/**
- * @link https://github.com/JeroenDeDauw/RomanNumbers
- * @license GNU GPL v2+
- */
 class DecToRoman
 {
 
