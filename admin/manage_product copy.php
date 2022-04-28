@@ -11,9 +11,9 @@ if($_SESSION['ADMIN_ROLE']==1){
 
 $categories_id='';
 $name='';
-/*$mrp='';
+$mrp='';
 $price='';
-$qty='';*/
+$qty='';
 $image='';
 $short_decs='';
 $description='';
@@ -26,16 +26,6 @@ $multipleImageArr=[];
 $msg='';
 
 $image_required='required';
-
-
-$attrProduct[0]['product_id']='';
-$attrProduct[0]['size_id']='';
-$attrProduct[0]['color_id']='';
-$attrProduct[0]['mrp']='';
-$attrProduct[0]['price']='';
-$attrProduct[0]['qty']='';
-$attrProduct[0]['id']='';
-
 
 if(isset($_GET['pi']) && $_GET['pi']>0){
 	$pi=get_safe_value($con,$_GET['pi']);
@@ -52,9 +42,9 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 		$categories_id=$row['categories_id'];
 		$sub_categories_id=$row['sub_categories_id'];
 		$name=$row['name'];
-		/*$mrp=$row['mrp'];
+		$mrp=$row['mrp'];
 		$price=$row['price'];
-		$qty=$row['qty'];*/
+		$qty=$row['qty'];
 		$short_decs=$row['short_decs'];
 		$description=$row['description'];
 		$meta_title=$row['meta_title'];
@@ -72,32 +62,18 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 				$jj++;
 			}
 		}
-
-		$resProductAttr=mysqli_query($con,"select * from product_attributes where product_id='$id'");
-		$jj=0;
-		while($rowProductAttr=mysqli_fetch_assoc($resProductAttr)){
-			$attrProduct[$jj]['product_id']=$rowProductAttr['product_id'];
-			$attrProduct[$jj]['size_id']=$rowProductAttr['size_id'];
-			$attrProduct[$jj]['color_id']=$rowProductAttr['color_id'];
-			$attrProduct[$jj]['mrp']=$rowProductAttr['mrp'];
-			$attrProduct[$jj]['price']=$rowProductAttr['price'];
-			$attrProduct[$jj]['qty']=$rowProductAttr['qty'];
-			$attrProduct[$jj]['id']=$rowProductAttr['id'];
-			$jj++;
-		}		
 	}else{
 		redirect('categories.php');
 	}
 }
 
 if(isset($_POST['submit'])){
-	//prx($_POST);
 	$categories_id=get_safe_value($con,$_POST['categories_id']);
 	$sub_categories_id=get_safe_value($con,$_POST['sub_categories_id']);
 	$name=get_safe_value($con,$_POST['name']);
-	/*$mrp=get_safe_value($con,$_POST['mrp']);
+	$mrp=get_safe_value($con,$_POST['mrp']);
 	$price=get_safe_value($con,$_POST['price']);
-	$qty=get_safe_value($con,$_POST['qty']);*/
+	$qty=get_safe_value($con,$_POST['qty']);
 	$short_decs=get_safe_value($con,$_POST['short_decs']);
 	$description=get_safe_value($con,$_POST['description']);
 	$meta_title=get_safe_value($con,$_POST['meta_title']);
@@ -149,42 +125,39 @@ if(isset($_POST['submit'])){
 				$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 				move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
 				
-				$update_sql="update product set categories_id='$categories_id',name='$name',short_decs='$short_decs',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',image='$image',best_seller='$best_seller',sub_categories_id='$sub_categories_id' where id='$id'";
+				$update_sql="update product set categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_decs='$short_decs',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',image='$image',best_seller='$best_seller',sub_categories_id='$sub_categories_id' where id='$id'";
 			}else{
-				$update_sql="update product set categories_id='$categories_id',name='$name',short_decs='$short_decs',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',best_seller='$best_seller',sub_categories_id='$sub_categories_id' where id='$id'";
+				$update_sql="update product set categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_decs='$short_decs',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',best_seller='$best_seller',sub_categories_id='$sub_categories_id' where id='$id'";
 			}
 
 			mysqli_query($con,$update_sql);
 		}else{
 			$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 			move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
-			mysqli_query($con,"insert into product(categories_id,short_decs,description,meta_title,meta_desc,meta_keyword,status,image,best_seller,sub_categories_id,added_by) values('$categories_id','$name','$short_decs','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image','$best_seller','$sub_categories_id','".$_SESSION['ADMIN_ID']."')");
+			mysqli_query($con,"insert into product(categories_id,name,mrp,price,qty,short_decs,description,meta_title,meta_desc,meta_keyword,status,image,best_seller,sub_categories_id,added_by) values('$categories_id','$name','$mrp','$price','$qty','$short_decs','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image','$best_seller','$sub_categories_id','".$_SESSION['ADMIN_ID']."')");
 			$id=mysqli_insert_id($con);
 		}
 
-		/*Product Multiple Images Start*/
 
 		if(isset($_GET['id']) && $_GET['id']!=''){
-			if (isset($_FILES['product_images']['name'])) {
-				foreach ($_FILES['product_images']['name'] as $key=>$val){
-					if($_FILES['product_images']['name'][$key]!=''){
-						if(isset($_POST['product_images_id'][$key])){
-							
-							$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
-							move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
-			
-							mysqli_query($con,"update product_images set product_image='$image' where id='".$_POST['product_images_id'][$key]."'");
-							
-						}else{
-							$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
-							move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
-			
-							mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");	
-						}
+			foreach ($_FILES['product_images']['name'] as $key=>$val){
+				if($_FILES['product_images']['name'][$key]!=''){
+					if(isset($_POST['product_images_id'][$key])){
+						
+						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
+						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
+		
+						mysqli_query($con,"update product_images set product_image='$image' where id='".$_POST['product_images_id'][$key]."'");
+						
+					}else{
+						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
+						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
+		
+						mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");	
 					}
-				}	
+				}
 			}
-			
+
 		}else{
 			if(isset($_FILES['product_images']['name'])){
 				foreach ($_FILES['product_images']['name'] as $key=>$val){
@@ -195,28 +168,6 @@ if(isset($_POST['submit'])){
 				}
 			}
 		}
-		/*Product Multiple Images End*/
-
-		/*Product Attributes Start*/
-		
-		if(isset($_POST['mrp'])){
-			foreach($_POST['mrp'] as $key=>$val){
-				$mrp=get_safe_value($con,$_POST['mrp'][$key]);
-				$price=get_safe_value($con,$_POST['price'][$key]);
-				$qty=get_safe_value($con,$_POST['qty'][$key]);
-				$size_id=get_safe_value($con,$_POST['size_id'][$key]);
-				$color_id=get_safe_value($con,$_POST['color_id'][$key]);
-				$attr_id=get_safe_value($con,$_POST['attr_id'][$key]);
-				
-				if($attr_id>0){
-					mysqli_query($con,"update product_attributes set size_id='$size_id',color_id='$color_id',mrp='$mrp',price='$price',qty='$qty' where id='$attr_id'");
-				}else{
-					mysqli_query($con,"insert into product_attributes(product_id,size_id,color_id,mrp,price,qty) values('$id','$size_id','$color_id','$mrp','$price','$qty')");
-				}
-			}
-		}
-			
-		/*Product Attributes End*/
 
 		redirect('product.php');
 	
@@ -261,11 +212,12 @@ if(isset($_POST['submit'])){
 						</div>
 
 						<div class="form-group">
+							<label for="categories" class="form-control-label">Product Name</label>
+							<input type="text" name="name" placeholder="Enter product name" class="form-control" required value="<?php echo $name?>">
+						</div>
+
+						<div class="form-group">
 							<div class="row">
-								<div class="col-lg-9">
-									<label for="categories" class="form-control-label">Product Name</label>
-									<input type="text" name="name" placeholder="Enter product name" class="form-control" required value="<?php echo $name?>">
-								</div>
 								<div class="col-lg-3">
 									<label for="categories" class=" form-control-label">Best Seller</label>
 									<select name="best_seller" class="form-control" required>
@@ -284,86 +236,20 @@ if(isset($_POST['submit'])){
 										?>
 									</select>
 								</div>
-							</div>
-						</div>
-
-						<div class="form-group"  id="product_attr_box">
-									<?php 
-									$attrProductLoop=1;
-									foreach($attrProduct as $list){?>
-									<div class="row"id="attr_<?php echo $attrProductLoop?>">
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label">MRP</label>
-										<input type="text" name="mrp[]" placeholder="MRP" class="form-control" required value="<?php echo $list['mrp']?>">
-									  </div>
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label">Price</label>
-										<input type="text" name="price[]" placeholder="Price" class="form-control" required value="<?php echo $list['price']?>">
-									  </div>
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label">Qty</label>
-										<input type="text" name="qty[]" placeholder="Qty" class="form-control" required value="<?php echo $list['qty']?>">
-									  </div>
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label">Size</label>
-										<select class="form-control" name="size_id[]" id="size_id">
-										<option>Size</option>
-										<?php
-											$res=mysqli_query($con,"select id,size from size_master order by order_by asc");
-											while($row=mysqli_fetch_assoc($res)){
-												if($list['size_id']==$row['id']){
-													echo "<option value=".$row['id']." selected>".$row['size']."</option>";
-												}else{
-													echo "<option value=".$row['id']." >".$row['size']."</option>";	
-												}
-											}
-											?>
-										</select>
-										
-									  </div>
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label">Color</label>
-										<select class="form-control" name="color_id[]" id="color_id">
-										<option>Color</option>
-										<?php
-											$res=mysqli_query($con,"select id,color from color_master order by color asc");
-											while($row=mysqli_fetch_assoc($res)){
-												if($list['color_id']==$row['id']){
-													echo "<option value=".$row['id']." selected>".$row['color']."</option>";
-												}else{
-													echo "<option value=".$row['id']." >".$row['color']."</option>";	
-												}
-											}
-											?>
-										</select>
-									  </div>
-									  <div class="col-lg-2">
-										<label for="categories" class=" form-control-label"></label>
-										<?php
-										if($attrProductLoop==1){
-											?>
-											<button id="" type="button" class="btn btn-lg btn-info btn-block" onclick="add_more_attr()">
-												<span id="payment-button-amount">Add More</span>
-											</button>
-											<?php
-										}else{
-											?>
-											<button id="" type="button" class="btn btn-lg btn-danger btn-block" onclick="remove_attr('<?php echo $attrProductLoop?>','<?php echo $list['id']?>')">
-												<span id="payment-button-amount">Remove</span>
-											</button>
-											<?php
-										}
-										
-										?>
-										<input type="hidden" name="attr_id[]" value='<?php echo $list['id']?>'/>
-									  </div>
-									</div>
-									<?php 
-									$attrProductLoop++;
-									} ?>
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product MRP</label>
+									<input type="text" name="mrp" placeholder="Enter product mrp" class="form-control" required value="<?php echo $mrp?>">
 								</div>
-								
-								
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product Price</label>
+									<input type="text" name="price" placeholder="Enter product Price" class="form-control" required value="<?php echo $price?>">
+								</div>
+								<div class="col-lg-3">
+									<label for="categories" class="form-control-label">Product Qty</label>
+									<input type="text" name="qty" placeholder="Enter product qty" class="form-control" required value="<?php echo $qty?>">
+								</div>
+							</div>							
+						</div>
 
 						<div class="form-group">
 							<div class="row" id="image_box">
@@ -455,31 +341,7 @@ if(isset($_POST['submit'])){
 			jQuery('#add_image_box_'+id).remove();
 			
 		}
-		var attr_count=1;
-		function add_more_attr(){
-			attr_count++;
-			
-			var size_html=jQuery('#attr_1 #size_id').html();
-			size_html=size_html.replace('selected','');
-			
-			var color_html=jQuery('#attr_1 #color_id').html();
-			color_html=color_html.replace('selected','');
-			
-			var html='<div class="row mt20" id="attr_'+attr_count+'"> <div class="col-lg-2"><label for="categories" class=" form-control-label">MRP</label><input type="text" name="mrp[]" placeholder="MRP" class="form-control" required="" value=""> </div> <div class="col-lg-2"><label for="categories" class=" form-control-label">Price</label><input type="text" name="price[]" placeholder="Price" class="form-control" required="" value=""> </div> <div class="col-lg-2"><label for="categories" class=" form-control-label">Qty</label><input type="text" name="qty[]" placeholder="Qty" class="form-control" required="" value=""> </div> <div class="col-lg-2"><label for="categories" class=" form-control-label">Size</label><select class="form-control" id="size_id" name="size_id[]">'+size_html+'</select> </div> <div class="col-lg-2"><label for="categories" class=" form-control-label">Color</label><select class="form-control" id="color_id" name="color_id[]">'+color_html+'</select> </div> <div class="col-lg-2"><label for="categories" class=" form-control-label">&nbsp;</label><button id="" type="button" class="btn btn-lg btn-danger btn-block" onclick=remove_attr("'+attr_count+'")><span id="payment-button-amount">Remove</span></button> </div><input type="hidden" name="attr_id[]" value=""/></div>';
-			jQuery('#product_attr_box').append(html);
-		}
 		
-		function remove_attr(attr_count,id){
-			jQuery.ajax({
-				url:'remove_product_attr.php',
-				data:'id='+id,
-				type:'post',
-				success:function(result){
-					jQuery('#attr_'+attr_count).remove();
-				}
-			});
-		}
-	
 	</script>
 <?php
 require('footer.inc.php');

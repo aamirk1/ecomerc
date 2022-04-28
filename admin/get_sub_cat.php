@@ -4,8 +4,7 @@ require('function.inc.php');
 if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
 
 }else{
-   header('location:login.php');
-   die();
+   redirect('login.php');
 } 
 $categories_id=get_safe_value($con,$_POST['categories_id']);
 $sub_cat_id=get_safe_value($con,$_POST['sub_cat_id']);

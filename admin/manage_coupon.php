@@ -18,8 +18,8 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 		$coupon_type=$row['coupon_type'];
 		$cart_min_value=$row['cart_min_value'];
 	}else{
-		header('location:coupon.php');
-		die();
+		redirect('coupon.php');
+		
 	}
 }
 
@@ -55,8 +55,7 @@ if(isset($_POST['submit'])){
 			
 			mysqli_query($con,"insert into coupon_master(coupon_code,coupon_value,coupon_type,cart_min_value,status) values('$coupon_code','$coupon_value','$coupon_type','$cart_min_value',1)");
 		}
-		header('location:coupon.php');
-		die();
+		redirect('coupon.php');
 	}
 }
 ?>

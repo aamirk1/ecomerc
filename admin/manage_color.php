@@ -1,24 +1,24 @@
 <?php
 require('header.inc.php');
 isAdmin();
-$categories='';
+$color='';
 $msg='';
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$id=get_safe_value($con,$_GET['id']);
-	$res=mysqli_query($con,"select * from categories where id='$id'");
+	$res=mysqli_query($con,"select * from color_master where id='$id'");
 	$check=mysqli_num_rows($res);
 	if($check>0){
 		$row=mysqli_fetch_assoc($res);
-		$categories=$row['categories'];
+		$color=$row['color'];
 	}else{
-		redirect('categories.php');
-		
+		header('location:color.php');
+		die();
 	}
 }
 
 if(isset($_POST['submit'])){
-	$categories=get_safe_value($con,$_POST['categories']);
-	$res=mysqli_query($con,"select * from categories where categories='$categories'");
+	$color=get_safe_value($con,$_POST['color']);
+	$res=mysqli_query($con,"select * from color_master where color='$color'");
 	$check=mysqli_num_rows($res);
 	if($check>0){
 		if(isset($_GET['id']) && $_GET['id']!=''){
@@ -26,20 +26,21 @@ if(isset($_POST['submit'])){
 			if($id==$getData['id']){
 
 			}else{
-				$msg="Categories already exist";
+				$msg="Color already exist";
 			}
 		}else{
-			$msg="Categories already exist";
+			$msg="Color already exist";
 		}
 	}
 	
 	if($msg==''){
 		if(isset($_GET['id']) && $_GET['id']!=''){		
-			mysqli_query($con,"update categories set categories='$categories' where id='$id'");
+			mysqli_query($con,"update color_master set color='$color' where id='$id'");
 		}else{
-			mysqli_query($con,"insert into categories(categories,status) values('$categories','1')");
+			mysqli_query($con,"insert into color_master(color,status) values('$color','1')");
 		}
-		redirect('categories.php');
+		header('location:color.php');
+		
 	}
 }
 ?>
@@ -48,12 +49,12 @@ if(isset($_POST['submit'])){
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
-					<div class="card-header"><strong>Categories</strong><small> Form</small></div>
+					<div class="card-header"><strong>Color</strong><small> Form</small></div>
 					<form method="post">
 					<div class="card-body card-block">
 						<div class="form-group">
-							<label for="categories" class=" form-control-label">Categories</label>
-							<input type="text" name="categories" placeholder="Enter your categories name" class="form-control" required value="<?php echo $categories?>">
+							<label for="color" class=" form-control-label">Color</label>
+							<input type="text" name="color" placeholder="Enter Your Color name" class="form-control" required value="<?php echo $color?>">
 						</div>
 						<button id="payment-button" name="submit" type="submit" class="btn btn-lg btn-info btn-block">
 							<span id="payment-button-amount" name="submit">Submit</span>

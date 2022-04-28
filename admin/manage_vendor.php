@@ -18,8 +18,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 		$email=$row['email'];
 		$mobile=$row['mobile'];
 	}else{
-		header('location:manage_vendor.php');
-		die();
+		redirect('manage_vendor.php');
 	}
 }
 
@@ -55,8 +54,7 @@ if(isset($_POST['submit'])){
 			
 			mysqli_query($con,"insert into admin_users(username,password,email,mobile,role,status) values('$username','$password','$email','$mobile',1,1)");
 		}
-		header('location:vendor.php');
-		die();
+		redirect('vendor.php');
 	}
 }
 ?>

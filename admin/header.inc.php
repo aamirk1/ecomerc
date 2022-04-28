@@ -49,6 +49,12 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
                      <a href="product_review.php" > Product Review</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
+                     <a href="color.php" > Color</a>
+                  </li>
+                  <li class="menu-item-has-children dropdown">
+                     <a href="size.php" > Size</a>
+                  </li>
+                  <li class="menu-item-has-children dropdown">
                      <a href="banner.php" > Banner</a>
                   </li>
 

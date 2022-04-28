@@ -74,7 +74,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="copyright__inner">
-                                <p>&copy; <a href="#">Aamir</a> <?php echo date('Y')?> All right reserved.</p>
+                                <p>&copy; <a href="#">Masav</a> <?php echo date('Y')?> All right reserved.</p>
                                 <a href="#"><img src="images/others/shape/paypol.png" alt="payment images"></a>
                             </div>
                         </div>

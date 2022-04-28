@@ -3,10 +3,10 @@
             <div class="footer-inner bg-white">
                <div class="row">
                   <div class="col-sm-6">
-                     Copyright &copy; <?php echo date('Y')?> Aamir
+                     Copyright &copy; <?php echo date('Y')?> Masav
                   </div>
                   <div class="col-sm-6 text-right">
-                     Designed by <a href="#">Aamir</a>
+                     Designed by <a href="#">Masav</a>
                   </div>
                </div>
             </div>
@@ -16,5 +16,6 @@
       <script src="assets/js/popper.min.js" type="text/javascript"></script>
       <script src="assets/js/plugins.js" type="text/javascript"></script>
       <script src="assets/js/main.js" type="text/javascript"></script>
+      <script src="assets/js/custom.js" type="text/javascript"></script>
    </body>
 </html>

@@ -18,8 +18,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 		$order_no=$row['order_no'];
 		
 	}else{
-		header('location:banner.php');
- 		die();
+		redirect('banner.php');
 	}
 }
 
@@ -55,8 +54,7 @@ if(isset($_POST['submit'])){
 			move_uploaded_file($_FILES['image']['tmp_name'],BANNER_IMAGE_SERVER_PATH.$image);
 			mysqli_query($con,"insert into banner(btn_link,image,order_no,status) values('$btn_link','$image','$order_no','1')");
 		}
-		header('location:banner.php');
-		die();
+		redirect('banner.php');
 	}
 }
 ?>
