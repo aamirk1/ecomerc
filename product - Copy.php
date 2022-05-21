@@ -12,44 +12,22 @@ if(isset($_GET['id'])){
         </script>
         <?php
     }
-
     $resMultipleImages=mysqli_query($con,"select * from product_images where product_id='$product_id'");
-    
-	$multipleImages=[];
-	if(mysqli_num_rows($resMultipleImages)>0){
-		while($rowMultipleImages=mysqli_fetch_assoc($resMultipleImages)){
-			$multipleImages[]=$rowMultipleImages['product_images'];
-		}
-	}
-	
-	
-	$resAttr=mysqli_query($con,"select product_attributes.*,color_master.color,size_master.size from product_attributes 
-	left join color_master on product_attributes.color_id=color_master.id and color_master.status=1 
-	left join size_master on product_attributes.size_id=size_master.id and size_master.status=1
-	where product_attributes.product_id='$product_id'");
-	$productAttr=[];
-	$colorArr=[];
-	$sizeArr=[];
-	if(mysqli_num_rows($resAttr)>0){
-		while($rowAttr=mysqli_fetch_assoc($resAttr)){
-			$productAttr[]=$rowAttr;
-			$colorArr[$rowAttr['color_id']][]=$rowAttr['color'];
-			$sizeArr[]=$rowAttr['size'];
-			$colorArr1[]=$rowAttr['color'];
-		}
-	}
-	$is_size=count(array_filter($sizeArr));
-	$is_color=count(array_filter($colorArr1));
-	//$colorArr=array_unique($colorArr);
-	$sizeArr=array_unique($sizeArr);
+    $multipleImages=[];
+    if(mysqli_num_rows($resMultipleImages)>0){
+        while($rowMultipleImages=mysqli_fetch_assoc($resMultipleImages)){
+            $multipleImages[]=$rowMultipleImages['product_image'];
+        }
+    }
 }else{
-	?>
-	<script>
-	window.location.href='index.php';
-	</script>
-	<?php
+    ?>
+    <script>
+        window.location.href='index.php';
+    </script>
+    <?php
 }
-
+//$product_id=mysqli_real_escape_string($con,$_GET['id']);
+//$get_product=get_product($con,'','',$product_id);
 
 if(isset($_POST['review_submit'])){
 	$rating=get_safe_value($con,$_POST['rating']);
@@ -117,81 +95,42 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                 <h2><?php echo $get_product['0']['name']?></h2>
                                 <ul  class="pro__prize">
                                     <li class="old__prize"><?php echo $get_product['0']['mrp']?></li>
-                                    <li class="new__price"><?php echo $get_product['0']['price']?></li>
+                                    <li><?php echo $get_product['0']['price']?></li>
                                 </ul>
                                 <p class="pro__info"><?php echo $get_product['0']['short_decs']?></p>
                                 <div class="ht__pro__desc">
                                     <div class="sin__desc">
-                                    <?php
-										$productSoldQtyByProductId=productSoldQtyByProductId($con,$get_product['0']['id']);
-										
-										$pending_qty=$get_product['0']['qty']-$productSoldQtyByProductId;
-										
-										$cart_show='yes';
-										if($get_product['0']['qty']>$productSoldQtyByProductId){
-											$stock='In Stock';			
-										}else{
-											$stock='Not in Stock';
-											$cart_show='';
-										}
-										?>
+                                        <?php
+                                        $productSoldQtyByProductId=productSoldQtyByProductId($con,$get_product['0']['id']);
+                                        
+                                        $pending_qty=$get_product['0']['qty']-$productSoldQtyByProductId;
+
+                                        $cart_show='yes';
+                                        if($get_product['0']['qty']>$productSoldQtyByProductId){
+                                            $stock='In Stock';
+                                        }else{
+                                            $stock='Out Of Stock';
+                                            $cart_show='';
+                                        }
+                                        ?>
                                         <p><span>Availability:</span> <?php echo $stock?></p>
                                     </div>
-									
-									<?php if($is_color>0){?>
-									<div class="sin__desc align--left">
-										<p><span>color:</span></p>
-										<ul class="pro__color">
-											<?php 
-											foreach($colorArr as $key=>$val){
-												echo "<li style='background:".$val[0]." none repeat scroll 0 0'><a href='javascript:void(0)' onclick=loadAttr('".$key."','".$get_product['0']['id']."','color')>".$val[0]."</a></li>";
-											}
-											?>
-											
-										</ul>
-									</div>
-									<?php } ?>
-									
-									<?php if($is_size>0){?>
-									<div class="sin__desc align--left">
-										<p><span>size</span></p>
-										<select class="select__size" id="size_attr" onchange="showQty()">
-											<option value="">Size</option>
-											<?php 
-											foreach($sizeArr as $list){
-												echo "<option>$list</option>";
-											}
-											?>
-											
-										</select>
-									</div>
-									<?php } ?>
-									
-									<?php
-									$isQtyHide="hide";
-									if($is_color==0 && $is_size==0){
-										$isQtyHide="";
-									}
-									?>
-									
-									
-									<div class="sin__desc align--left <?php echo $isQtyHide?>" id="cart_qty">
-										<?php
-										if($cart_show!=''){
-										?>
+                                    <div class="sin__desc">
+                                    <?php
+                                    if($cart_show!=''){
+                                    ?>
                                         <p><span>Qty:</span>
-										<select id="qty"  class="select__size">
-											<?php
-											for($i=1;$i<=$pending_qty;$i++){
-												echo "<option>$i</option>";
-											}
-											?>
-										</select>
-										</p>
-										<?php } ?>
+                                        <select id="qty">
+                                            
+                                            <?php
+                                            for($i=1;$i<=$pending_qty;$i++){
+                                                echo "<option>$i</option>";
+                                            }
+                                            ?>
+                                        </select>                                    
+                                        </p>
+                                        <?php } ?>
                                     </div>
-									
-									<div id="cart_attr_msg"></div>
                                     <div class="sin__desc align--left">
                                         <p><span>Categories:</span></p>
                                         <ul class="pro__cat__list">
@@ -207,14 +146,14 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 
                                 <a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
                                 <?php } ?>
-                                <div id="social_share_box">
-                                    <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
+                            <div id="social_share_box">
+                                <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
 
-                                    <a target="_blank" href="https://facebook.com/share.php?u=<?php echo $meta_url ?>"><img src="images\icons\facebook.png"></a>
+                                <a target="_blank" href="https://facebook.com/share.php?u=<?php echo $meta_url ?>"><img src="images\icons\facebook.png"></a>
 
-                                    <a target="_blank" href="https://twitter.com/share?text=<?php echo $get_product['0']['name']?>&url=<?php echo $meta_url ?>"><img src="images\icons\twitter.png"></a>
-                                    
-                                </div>
+                                <a target="_blank" href="https://twitter.com/share?text=<?php echo $get_product['0']['name']?>&url=<?php echo $meta_url ?>"><img src="images\icons\twitter.png"></a>
+                                
+                            </div>
                             </div>
                             
                         </div>
@@ -222,8 +161,6 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                 </div>
             </div>
         </section>
-		<input type="hidden" id="cid"/>
-		<input type="hidden" id="sid"/>
         <section class="htc__produc__decription bg__white">
             <div class="container">
                 <div class="row">
@@ -363,7 +300,8 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>                                                           
+                            <?php } ?>
+                                                           
                         </div>
                     </div>
                 </div>
@@ -375,21 +313,19 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                 unset($arrRec[$key]);
             }
             $arrRec[]=$product_id;
+            setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
     
         }else{
             $arrRec[]=$product_id;
+            setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
         }
-        setcookie('recently_viewed',serialize($arrRec),time()+60*60*24*365);
         ?>
         <script>
-			function showMultipleImage(im){
-				jQuery('#img-tab-1').html("<img src='"+im+"' data-origin='"+im+"'/>");
-				jQuery('.imageZoom').imgZoom();
-			}
-			let is_color='<?php echo $is_color?>';
-			let is_size='<?php echo $is_size?>';
-			
-		</script>
+            function showMultipleImage(im){
+                jQuery('#img-tab-1').html("<img src='"+im+"' data-origin='"+im+"'/>");
+                jQuery('.imageZoom').imgZoom();
+            }
+        </script>
 <?php 
 require('footer.inc.php');
 ob_flush();

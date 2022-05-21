@@ -1886,7 +1886,7 @@ select.ht__select {
     margin-top: 21px;
 }
 .pro__color li a {
-    background: #000 none repeat scroll 0 0;
+   /* background: #000 none repeat scroll 0 0;*/
     display: inline-block;
     height: 20px;
     text-indent: -999999px;
@@ -3602,4 +3602,21 @@ ul.htc__instagram__posts.owl-carousel li img {
 }
 .mr5{
     margin-right: 5px;
+}
+#size_attr{
+    width:50px;
+}
+#coupon_result{
+	padding: 33px;
+    padding-top: 0px;
+    font-size: 15px;
+    font-weight: bold;
+}
+#coupon_box{
+	display:none;
+}
+
+
+#cart_attr_msg{
+	color:red;
 }

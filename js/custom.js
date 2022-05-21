@@ -91,35 +91,49 @@ function user_login(){
     }
 }
 
-
 function manage_cart(pid,type,is_checkout){
-    var is_error='';
-    if(type=='update'){
-        var qty=jQuery("#"+pid+"qty").val();
-    }else{
-        var qty=jQuery("#qty").val();
-    }
-    jQuery.ajax({
-        url:'manage_cart.php',
-        type:'post',
-        data:'pid='+pid+'&qty='+qty+'&type='+type,
-        success:function(result){
-            result=result.trim();
-            if(type=='update' || type=='remove'){
-                window.location.href=window.location.href;
-            }
-            if(result=='Not_available'){
-                alert('Quantity Not Available');
-            }else{
-                jQuery('.htc__qua').html(result);
-                if(is_checkout=='yes'){
-                    window.location.href='checkout.php';
-                }                
-            }
-        }
-    });
+	var is_error='';
+	if(type=='update'){
+		var qty=jQuery("#"+pid+"qty").val();
+	}else{
+		var qty=jQuery("#qty").val();
+	}
+	
+	let cid=jQuery('#cid').val();
+	let sid=jQuery('#sid').val();
+	
+	if(is_color!=0 && cid==''){
+		jQuery('#cart_attr_msg').html('Please select color');
+		is_error='yes';
+	}
+	if(is_size!=0 && sid=='' && is_error==''){
+		jQuery('#cart_attr_msg').html('Please select size');
+		is_error='yes';
+	}
+	
+	if(is_error==''){
+	
+		jQuery.ajax({
+			url:'manage_cart.php',
+			type:'post',
+			data:'pid='+pid+'&qty='+qty+'&type='+type+'&cid='+cid+'&sid='+sid,
+			success:function(result){
+				result=result.trim();
+				if(type=='update' || type=='remove'){
+					window.location.href=window.location.href;
+				}
+				if(result=='not_avaliable'){
+					alert('Qty not avaliable');	
+				}else{
+					jQuery('.htc__qua').html(result);
+					if(is_checkout=='yes'){
+						window.location.href='checkout.php';
+					}
+				}
+			}	
+		});	
+	}
 }
-
 
 function sort_product_drop(cat_id,site_path){
     var sort_product_id=jQuery('#sort_product_id').val();
@@ -143,3 +157,36 @@ function wishlist_manage(pid,type){
     });
 }
 jQuery('.imageZoom').imgZoom();
+
+
+function loadAttr(c_s_id,pid,type){
+	jQuery('#cid').val(c_s_id);				
+	if(is_size==0){
+		jQuery('#cart_attr_msg').html('');
+		jQuery('#cart_qty').removeClass('hide');
+	}else{
+		jQuery('#cart_attr_msg').html('');
+		jQuery.ajax({
+			url:'load_attr.php',
+			type:'post',
+			data:'c_s_id='+c_s_id+'&pid='+pid+'&type='+type,
+			success:function(result){
+				jQuery('#size_attr').html("<option value=''>Size</option>"+result);
+			}
+			
+		});	
+	}
+	
+}
+
+function showQty(){
+	let cid=jQuery('#cid').val();
+	if(cid=='' && is_color>0){
+		jQuery('#cart_attr_msg').html('Please select color');
+	}else{
+		let sid=jQuery('#size_attr').val();
+		jQuery('#sid').val(sid);
+		jQuery('#cart_attr_msg').html('');
+		jQuery('#cart_qty').removeClass('hide');
+	}
+}

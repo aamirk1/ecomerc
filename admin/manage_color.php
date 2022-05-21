@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
 		}else{
 			mysqli_query($con,"insert into color_master(color,status) values('$color','1')");
 		}
-		header('location:color.php');
+		redirect('color.php');
 		
 	}
 }
