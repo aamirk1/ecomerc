@@ -13,12 +13,11 @@ if(isset($_GET['id'])){
         <?php
     }
 
-    $resMultipleImages=mysqli_query($con,"select * from product_images where product_id='$product_id'");
-    
+    $resMultipleImages=mysqli_query($con,"select product_image from product_images where product_id='$product_id'");
 	$multipleImages=[];
 	if(mysqli_num_rows($resMultipleImages)>0){
 		while($rowMultipleImages=mysqli_fetch_assoc($resMultipleImages)){
-			$multipleImages[]=$rowMultipleImages['product_images'];
+			$multipleImages[]=$rowMultipleImages['product_image'];
 		}
 	}
 	
@@ -34,14 +33,16 @@ if(isset($_GET['id'])){
 		while($rowAttr=mysqli_fetch_assoc($resAttr)){
 			$productAttr[]=$rowAttr;
 			$colorArr[$rowAttr['color_id']][]=$rowAttr['color'];
-			$sizeArr[]=$rowAttr['size'];
+			$sizeArr[$rowAttr['size_id']][]=$rowAttr['size'];
+			
 			$colorArr1[]=$rowAttr['color'];
+			$sizeArr1[]=$rowAttr['size'];
 		}
 	}
-	$is_size=count(array_filter($sizeArr));
+	$is_size=count(array_filter($sizeArr1));
 	$is_color=count(array_filter($colorArr1));
 	//$colorArr=array_unique($colorArr);
-	$sizeArr=array_unique($sizeArr);
+	//$sizeArr=array_unique($sizeArr1);
 }else{
 	?>
 	<script>
@@ -121,22 +122,33 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                 </ul>
                                 <p class="pro__info"><?php echo $get_product['0']['short_decs']?></p>
                                 <div class="ht__pro__desc">
+									<?php 
+									$cart_show='yes';
+									$is_cart_box_show="hide";
+									if($is_color==0 && $is_size==0){
+										$is_cart_box_show="";
+									?>
+								
                                     <div class="sin__desc">
-                                    <?php
-										$productSoldQtyByProductId=productSoldQtyByProductId($con,$get_product['0']['id']);
+										<?php
+											$getProductAttr=getProductAttr($con,$get_product['0']['id']);
 										
-										$pending_qty=$get_product['0']['qty']-$productSoldQtyByProductId;
+											$productSoldQtyByProductId=productSoldQtyByProductId($con,$get_product['0']['id'],$getProductAttr);
+											
+											$pending_qty=$get_product['0']['qty']-$productSoldQtyByProductId;
+											
+											$cart_show='yes';
+											if($get_product['0']['qty']>$productSoldQtyByProductId){
+												$stock='In Stock';			
+											}else{
+												$stock='Not in Stock';
+												$cart_show='';
+											}
 										
-										$cart_show='yes';
-										if($get_product['0']['qty']>$productSoldQtyByProductId){
-											$stock='In Stock';			
-										}else{
-											$stock='Not in Stock';
-											$cart_show='';
-										}
 										?>
                                         <p><span>Availability:</span> <?php echo $stock?></p>
                                     </div>
+									<?php } ?>
 									
 									<?php if($is_color>0){?>
 									<div class="sin__desc align--left">
@@ -156,10 +168,10 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 									<div class="sin__desc align--left">
 										<p><span>size</span></p>
 										<select class="select__size" id="size_attr" onchange="showQty()">
-											<option value="">Size</option>
+                                        <option value="">Size</option>
 											<?php 
-											foreach($sizeArr as $list){
-												echo "<option>$list</option>";
+											foreach($sizeArr as $key=>$val){
+												echo "<option value='".$key."'>".$val[0]."</option>";
 											}
 											?>
 											
@@ -200,13 +212,13 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                     </div>
                                     </div>
                                 </div>
-                                <?php
-                                if($cart_show!=''){
-                                    ?>
-                                <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Add to cart</a>
-
-                                <a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
-                                <?php } ?>
+                                <div id="is_cart_box_show" class="<?php echo $is_cart_box_show?>">
+								
+									<a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Add to cart</a>
+									
+									<a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
+								
+								</div>
                                 <div id="social_share_box">
                                     <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
 
@@ -358,7 +370,7 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                             <h4><a href="product-details.html"><?php echo $list['name']?></a></h4>
                                             <ul class="fr__pro__prize">
                                                 <li class="old__prize"><?php echo $list['mrp']?></li>
-                                                <li class="new__prize"><?php echo $list['price']?></li>
+                                                <li class="new__price"><?php echo $list['price']?></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -388,6 +400,7 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 			}
 			let is_color='<?php echo $is_color?>';
 			let is_size='<?php echo $is_size?>';
+			let pid='<?php echo $product_id?>';
 			
 		</script>
 <?php 

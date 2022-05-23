@@ -56,11 +56,11 @@ function wishlist_add($con,$uid,$pid){
     mysqli_query($con,"insert into wishlist(user_id,product_id,added_on) values('$uid','$pid','$added_on')");
 }
 
-function productSoldQtyByProductId($con,$pid){
-    $sql="select sum(order_details.qty) as qty from order_details, `order` where `order`.id=order_details.order_id and order_details.product_id=$pid and `order`.order_status!=4 and((`order`.payment_type='payu' and `order`.payment_status='success') or (`order`.payment_type='COD' and `order`.payment_status!=''))";
-    $res=mysqli_query($con,$sql);
-    $row=mysqli_fetch_assoc($res);
-    return $row['qty'];
+function productSoldQtyByProductId($con,$pid,$attr_id){
+	$sql="select sum(order_details.qty) as qty from order_details,`order` where `order`.id=order_details.order_id and order_details.product_id=$pid and order_details.product_attr_id='$attr_id' and `order`.order_status!=4 and ((`order`.payment_type='payu' and `order`.payment_status='Success') or (`order`.payment_type='COD' and `order`.payment_status!=''))";
+	$res=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($res);
+	return $row['qty'];
 }
 
 function productQty($con,$pid){
@@ -664,5 +664,11 @@ function SentInvoice($con,$order_id){
 	}else{
 		//echo "Error occur";
 	}
+}
+function getProductAttr($con,$pid){
+	$sql="select id from product_attributes where product_id='$pid'";
+	$res=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($res);
+	return $row['id'];
 }
 ?>

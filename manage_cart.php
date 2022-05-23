@@ -7,16 +7,6 @@ $pid=get_safe_value($con,$_POST['pid']);
 $qty=get_safe_value($con,$_POST['qty']);
 $type=get_safe_value($con,$_POST['type']);
 
-
-$productSoldQtyByProductId=productSoldQtyByProductId($con,$pid);
-$productQty=productQty($con,$pid);
-
-$pending_qty=$productQty-$productSoldQtyByProductId;
-
-if($qty>$pending_qty && $type!='remove'){
-	echo "not_avaliable";
-	die();
-}
 $attr_id=0;
 if(isset($_POST['sid']) && isset($_POST['cid'])){
 	$sub_sql='';
@@ -28,9 +18,20 @@ if(isset($_POST['sid']) && isset($_POST['cid'])){
 	if($cid>0){
 		$sub_sql.=" and color_id=$cid ";
 	}
-	$row=mysqli_fetch_assoc(mysqli_query($con,"select id from product_attributes where product_id='$pid'"));
+	$row=mysqli_fetch_assoc(mysqli_query($con,"select id from product_attributes where product_id='$pid' $sub_sql"));
 	$attr_id=$row['id'];
 }
+
+$productSoldQtyByProductId=productSoldQtyByProductId($con,$pid,$attr_id);
+$productQty=productQty($con,$pid);
+
+$pending_qty=$productQty-$productSoldQtyByProductId;
+
+if($qty>$pending_qty && $type!='remove'){
+	echo "not_avaliable";
+	die();
+}
+
 
 
 $obj=new add_to_cart();

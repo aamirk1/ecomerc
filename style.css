@@ -3618,5 +3618,7 @@ ul.htc__instagram__posts.owl-carousel li img {
 
 
 #cart_attr_msg{
-	color:red;
+	color: red;
+    margin-top: 20px;
+    font-size: 25px;
 }
