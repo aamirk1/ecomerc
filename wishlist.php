@@ -8,11 +8,8 @@ if(!isset($_SESSION['USER_LOGIN'])){
     <?php
 }
 $uid=$_SESSION['USER_ID'];
-if(isset($_GET['id'])){
-    $wid=$_GET['id'];
-    mysqli_query($con,"delete from wishlist where id='$wid' and user_id='$uid'");
-}
-$res=mysqli_query($con,"select product.name,product.image,product.price,product.mrp, wishlist.id from product,wishlist where wishlist.product_id=product.id and wishlist.user_id='$uid'");
+
+$res=mysqli_query($con,"select product.name,product.image,product_attributes.price,product_attributes.mrp,product.id as pid,wishlist.id from product,wishlist,product_attributes where wishlist.product_id=product.id and wishlist.user_id='$uid' and product_attributes.product_id=product.id group by product_attributes.product_id");
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">

@@ -8,71 +8,55 @@ if(!isset($_SESSION['cart']) || count($_SESSION['cart'])==0){
     <?php
    
 }
-
-
 $cart_total=0;
-$errMsg="";
-
-$address='';
-$city='';
-$pincode='';
+foreach($_SESSION['cart'] as $key=>$val){
+    $productArr=get_product($con,'','',$key);
+    $price=$productArr[0]['price'];
+    $qty=$val['qty'];
+    $cart_total=$cart_total+($price*$qty);
+}
 
 if(isset($_POST['submit'])){
-	$address=get_safe_value($con,$_POST['address']);
-	$city=get_safe_value($con,$_POST['city']);
-	$pincode=get_safe_value($con,$_POST['pincode']);
-	$payment_type=get_safe_value($con,$_POST['payment_type']);
-	$user_id=$_SESSION['USER_ID'];
-	
-	foreach($_SESSION['cart'] as $key=>$val){
-		foreach($val as $key1=>$val1)	{
-			$resAttr=mysqli_fetch_assoc(mysqli_query($con,"select price from product_attributes where id='$key1'"));
-			$price=$resAttr['price'];
-			$qty=$val1['qty'];
-			$cart_total=$cart_total+($price*$qty);
-			
-		}
-	}
-	$total_price=$cart_total;
-	$payment_status='pending';
+    $address=get_safe_value($con,$_POST['address']);
+    $city=get_safe_value($con,$_POST['city']);
+    $pincode=get_safe_value($con,$_POST['pincode']);
+    $payment_type=get_safe_value($con,$_POST['payment_type']);
+    $address=get_safe_value($con,$_POST['address']);
+    $user_id=$_SESSION['USER_ID'];
+    $total_price=$cart_total;
+    $payment_status='pending';
     if($payment_type=='COD'){
         $payment_status='success';
     }
-	$order_status='1';
-	$added_on=date('Y-m-d h:i:s');
-	
-	$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-	
-	if(isset($_SESSION['COUPON_ID'])){
-		$coupon_id=$_SESSION['COUPON_ID'];
-		$coupon_code=$_SESSION['COUPON_CODE'];
-		$coupon_value=$_SESSION['COUPON_VALUE'];
-		$total_price=$total_price-$coupon_value;
-		unset($_SESSION['COUPON_ID']);
-		unset($_SESSION['COUPON_CODE']);
-		unset($_SESSION['COUPON_VALUE']);
-	}else{
-		$coupon_id='';
-		$coupon_code='';
-		$coupon_value='';	
-	}	
-    mysqli_query($con,"insert into `order`(user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on,coupon_id,coupon_code,coupon_value) values('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on','$coupon_id','$coupon_code','$coupon_value')");
-	
-	$order_id=mysqli_insert_id($con);
-	
-	foreach($_SESSION['cart'] as $key=>$val){
-		
-		foreach($val as $key1=>$val1)	{
-			$resAttr=mysqli_fetch_assoc(mysqli_query($con,"select price from product_attributes where id='$key1'"));
-			$price=$resAttr['price'];
-			$qty=$val1['qty'];
-			
-			mysqli_query($con,"insert into `order_details`(order_id,product_id,product_attr_id,qty,price) values('$order_id','$key','$key1','$qty','$price')");
-			
-		}
-	}
+    $order_status='1';
+    $added_on=date('Y-m-d h:i:s');
 
-	
+    if(isset($_SESSION['COUPON_ID'])){
+        $coupon_id=$_SESSION['COUPON_ID'];
+        $coupon_code=$_SESSION['COUPON_CODE'];
+        $coupon_value=$_SESSION['COUPON_VALUE'];
+        $total_price=$total_price-$coupon_value;
+        unset($_SESSION['COUPON_ID']);
+        unset($_SESSION['COUPON_CODE']);
+        unset($_SESSION['COUPON_VALUE']);
+    }else{
+        $coupon_id='';
+        $coupon_code='';
+        $coupon_value='';
+    }
+
+    mysqli_query($con,"insert into `order`(user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on,coupon_id,coupon_code,coupon_value) values('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on','$coupon_id','$coupon_code','$coupon_value')");
+
+    $order_id=mysqli_insert_id($con);
+
+    foreach($_SESSION['cart'] as $key=>$val){
+        $productArr=get_product($con,'','',$key);
+        $price=$productArr[0]['price'];
+        $qty=$val['qty'];
+            
+        mysqli_query($con,"insert into `order_details`(order_id,product_id,qty,price) values('$order_id','$key','$qty','$price')");
+        
+    }
     unset($_SESSION['cart']);
     //SentInvoice($con,$order_id);
     ?>
@@ -171,47 +155,33 @@ if(isset($_POST['submit'])){
                                     </div>
                                 </div>
                             </div>
-                            <?php }else{
-$lastOrderDetailsRes=mysqli_query($con,"select address,city,pincode from `order` where user_id='".$_SESSION['USER_ID']."'");
-
-if(mysqli_num_rows($lastOrderDetailsRes)>0){
-	$lastOrderDetailsRow=mysqli_fetch_assoc($lastOrderDetailsRes);
-	$address=$lastOrderDetailsRow['address'];
-	$city=$lastOrderDetailsRow['city'];
-	$pincode=$lastOrderDetailsRow['pincode'];
-}
-
-}
-?>
+                            <?php } ?>
                             <div class="<?php echo $accordion_class?>">
                                 Address Information
                             </div>
                             <form method="post">
-                            <div class="accordion__body">
-											<div class="bilinfo">
-												
-													<div class="row">
-														<div class="col-md-12">
-															<div class="single-input">
-																<input type="text" name="address" placeholder="Street Address" required value="<?php echo $address?>">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<input type="text" name="city" placeholder="City/State" required value="<?php echo $city?>">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="single-input">
-																<input type="text" name="pincode" placeholder="Post code/ zip" required value="<?php echo $pincode?>">
-															</div>
-														</div>
-														
-													</div>
-												
-											</div>
-										</div>
-										<div class="<?php echo $accordion_class?>">
+                                <div class="accordion__body">
+                                    <div class="bilinfo">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        <input type="text" name="address" placeholder="Street Address" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        <input type="text" name="city" placeholder="City/State" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        <input type="text" name="pincode" placeholder="Post code/ zip" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="<?php echo $accordion_class?>">
                                     payment information
                                 </div>
                                 <div class="accordion__body">
@@ -235,43 +205,31 @@ if(mysqli_num_rows($lastOrderDetailsRes)>0){
                 <div class="order-details">
                     <h5 class="order-details__title">Your Order</h5>
                     <div class="order-details__item">
-                                <?php
-								$cart_total=0;
-								foreach($_SESSION['cart'] as $key=>$val){
-								//$productArr=get_product($con,'','',$key);
-								
-								//prx($productArr);
-								
-								foreach($val as $key1=>$val1){
-									
-$resAttr=mysqli_fetch_assoc(mysqli_query($con,"select product_attributes.*,color_master.color,size_master.size from product_attributes 
-	left join color_master on product_attributes.color_id=color_master.id and color_master.status=1 
-	left join size_master on product_attributes.size_id=size_master.id and size_master.status=1
-	where product_attributes.id='$key1'"));						
-$productArr=get_product($con,'','',$key,'','','','',$key1);
-$pname=$productArr[0]['name'];
-$mrp=$productArr[0]['mrp'];
-$price=$productArr[0]['price'];
-$image=$productArr[0]['image'];
-$qty=$val1['qty'];	
-								
-								$cart_total=$cart_total+($price*$qty);
-								?>
-								<div class="single-item">
-                                    <div class="single-item__thumb">
-                                        <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$image?>"  />
-                                    </div>
-                                    <div class="single-item__content">
-                                        <a href="#"><?php echo $pname?> * <?php echo $qty?></a>
-                                        <span class="price"><?php echo $price*$qty?></span>
-                                    </div>
-                                    <div class="single-item__remove">
-                                        <a href="javascript:void(0)" onclick="manage_cart('<?php echo $key?>','remove')"><i class="icon-trash icons"></i></a>
-                                    </div>
-                                </div>
-								<?php } } ?>
+                        <?php
+                        $cart_total=0;
+                        foreach($_SESSION['cart'] as $key=>$val){
+                            $productArr=get_product($con,'','',$key);
+                            $pname=$productArr[0]['name'];
+                            $mrp=$productArr[0]['mrp'];
+                            $price=$productArr[0]['price'];
+                            $image=$productArr[0]['image'];
+                            $qty=$val['qty'];
+                            $cart_total=$cart_total+($price*$qty);
+                        ?>
+                        <div class="single-item">
+                            <div class="single-item__thumb">
+                                <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$image?>" />
                             </div>
-							
+                            <div class="single-item__content">
+                                <a href="#"><?php echo $pname?></a>
+                                <span class="price"><?php echo $price*$qty?></span>
+                            </div>
+                            <div class="single-item__remove">
+                            <a href="javascript:void(0)" onclick="manage_cart('<?php echo $key?>','remove')"><i class="zmdi zmdi-delete"></i></a>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
                     <div class="ordre-details__total" id="coupon_box">
                         <h5>Coupon Value</h5>
                         <span class="price" id="coupon_price"><?php echo $cart_total?></span>

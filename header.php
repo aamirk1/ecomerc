@@ -17,7 +17,8 @@ if(isset($_SESSION['USER_LOGIN'])){
       $wid=get_safe_value($con,$_GET['wishlist_id']);
       mysqli_query($con,"delete from wishlist where id='$wid' and user_id='$uid'");
    }
-   $wishlist_count=mysqli_num_rows(mysqli_query($con,"select product.name,product.image,product.price,product.mrp, wishlist.id from product,wishlist where wishlist.product_id=product.id and wishlist.user_id='$uid'"));
+   $wishlist_count=mysqli_num_rows(mysqli_query($con,"select product.name,product.image,wishlist.id from product,wishlist where wishlist.product_id=product.id and wishlist.user_id='$uid'"));
+	
 }
 $script_name=$_SERVER['SCRIPT_NAME'];
 $script_name_arr=explode('/',$script_name);
