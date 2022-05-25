@@ -45,7 +45,7 @@ $resBanner=mysqli_query($con,"select * from banner where status='1' order by ord
                             <div class="fr__hover__info">
                                 <ul class="product__action">
                                     <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id']?>','add')"><i class="icon-heart icons"></i></a></li>
-                                    <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id']?>','add')"><i class="icon-handbag icons"></i></a></li>
+                                    <li><a href="product.php?id=<?php echo $list['id']?>" ><i class="icon-handbag icons"></i></a></li>
                                 </ul>
                             </div>
                             <div class="fr__product__inner">
@@ -88,7 +88,7 @@ $resBanner=mysqli_query($con,"select * from banner where status='1' order by ord
                     <div class="fr__hover__info">
                         <ul class="product__action">
                             <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id']?>','add')"><i class="icon-heart icons"></i></a></li>
-                            <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id']?>','add')"><i class="icon-handbag icons"></i></a></li>
+                            <li><a href="product.php?id=<?php echo $list['id']?>" ><i class="icon-handbag icons"></i></a></li>
                         </ul>
                     </div>
                     <div class="fr__product__inner">

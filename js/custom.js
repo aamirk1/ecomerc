@@ -90,6 +90,11 @@ function user_login(){
         });
     }
 }
+function manage_cart_update(pid,type,size_id,color_id){
+	jQuery('#cid').val(color_id);
+	jQuery('#sid').val(size_id);
+	manage_cart(pid,type);
+}
 
 function manage_cart(pid,type,is_checkout){
 	var is_error='';
@@ -98,19 +103,20 @@ function manage_cart(pid,type,is_checkout){
 	}else{
 		var qty=jQuery("#qty").val();
 	}
-	
 	let cid=jQuery('#cid').val();
 	let sid=jQuery('#sid').val();
-	
-	if(is_color!=0 && cid==''){
-		jQuery('#cart_attr_msg').html('Please select color');
-		is_error='yes';
+	if(type=='add'){
+		
+		
+		if(is_color!=0 && cid==''){
+			jQuery('#cart_attr_msg').html('Please select color');
+			is_error='yes';
+		}
+		if(is_size!=0 && sid=='' && is_error==''){
+			jQuery('#cart_attr_msg').html('Please select size');
+			is_error='yes';
+		}
 	}
-	if(is_size!=0 && sid=='' && is_error==''){
-		jQuery('#cart_attr_msg').html('Please select size');
-		is_error='yes';
-	}
-	
 	if(is_error==''){
 	
 		jQuery.ajax({

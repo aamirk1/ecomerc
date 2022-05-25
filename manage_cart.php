@@ -23,7 +23,7 @@ if(isset($_POST['sid']) && isset($_POST['cid'])){
 }
 
 $productSoldQtyByProductId=productSoldQtyByProductId($con,$pid,$attr_id);
-$productQty=productQty($con,$pid);
+$productQty=productQty($con,$pid,$attr_id);
 
 $pending_qty=$productQty-$productSoldQtyByProductId;
 

@@ -1,87 +1,64 @@
-
-<footer id="htc__footer">
-            <div class="footer__container bg__cat--1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="footer">
-                                <h2 class="title__line--2">ABOUT US</h2>
-                                <div class="ft__details">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
-                                    <div class="ft__social__link">
-                                        <ul class="social__link">
-                                            <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
-
-                                            <li><a href="https://www.instagram.com/masav.in/"><i class="icon-social-instagram icons"></i></a></li>
-
-                                            <li><a href="#"><i class="icon-social-facebook icons"></i></a></li>
-
-                                            <!--<li><a href="#"><i class="icon-social-google icons"></i></a></li>
-
-                                            <li><a href="#"><i class="icon-social-linkedin icons"></i></a></li>-->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6 col-xs-12 xmt-40">
-                            <div class="footer">
-                                <h2 class="title__line--2">information</h2>
-                                <div class="ft__inner">
-                                    <ul class="ft__list">
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy & Policy</a></li>
-                                        <li><a href="#">Terms  & Condition</a></li>
-                                        <li><a href="#">Manufactures</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6 col-xs-12 xmt-40 smt-40">
-                            <div class="footer">
-                                <h2 class="title__line--2">my account</h2>
-                                <div class="ft__inner">
-                                    <ul class="ft__list">
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="cart.php">My Cart</a></li>
-                                        <li><a href="login.php">Login</a></li>
-                                        <li><a href="wishlist.php">Wishlist</a></li>
-                                        <li><a href="checkout.php">Checkout</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12 xmt-40 smt-40">
-                            <div class="footer">
-                                <h2 class="title__line--2">NEWSLETTER </h2>
-                                <div class="ft__inner">
-                                    <div class="news__input">
-                                        <input type="text" placeholder="Your Mail*">
-                                        <div class="send__btn">
-                                            <a class="fr__btn" href="#">Send Mail</a>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="footer">
+        <div class="f-1">
+            <h2>About</h2>
+            <ul>
+                <li><a href="">Contact Us</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Sell On Masav</a></li>
+            </ul>
+        </div>
+        <div class="f-1">
+            <h2>Help</h2>
+            <ul>
+                <li><a href="">Payments</a></li>
+                <li><a href="">Shipping</a></li>
+                <li><a href="">Cancellation & Return</a></li>
+                <li><a href="">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="f-1">
+            <h2>Policy</h2>
+            <ul>
+                <li><a href="">Return Policy</a></li>
+                <li><a href="">Term & Conditions</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Security</a></li>
+                <li><a href="">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="f-1">
+            <h2>Social</h2>
+            <ul>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Instagram</a></li>
+                <li><a href="">YouTube</a></li>
+            </ul>
+        </div>
+        <div class="right-content">
+            <div class="right">
+                <p class="text1">Mail Us:</p>
+                <p class="text2">Masav,<br>
+                    Tulinj Road, Central Park,<br>
+                    Near Police Chawki,<br>
+                    Mumbai 401209,<br>
+                    Maharashtra,India.</p>
             </div>
-            <div class="htc__copyright bg__cat--5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="copyright__inner">
-                                <p>&copy; <a href="#">Masav</a> <?php echo date('Y')?> All right reserved.</p>
-                                <a href="#"><img src="images/others/shape/paypol.png" alt="payment images"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="right">
+                <p class="text1">Register Office:</p>
+                <p class="text2">Masav,<br>
+                    Tulinj Road, Central Park,<br>
+                    Near Police Chawki,<br>
+                    Mumbai 401209,<br>
+                    Maharashtra,India.<br>
+                    Mobile No.: <span style="color: blue;">9766314537</span>
+                </p>
             </div>
-        </footer>
+        </div>
+        
+    </div>
+    <div class="copy">
+        Copyright &copy; <?php echo date('Y')?> &nbsp;Masav.in</a>
+        <span class="card"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd53rsgZUQ1IcJavNNywppBKDIEZd52JSuAd5NKQ6gjZR7PluwwNfvDIapigvMnUj7JfE0gTyEqM8Zms_xm_fSb7BNQF2P-on6n9HVZbCb8VmZCmQJhz_TpnTuLCleWaPrj6BxSviFpQF8w1o94B3QAdRkRatC6fj3U3tjOYNaoO6N7a_r0I13Ylg9/s320/allcard.png"></span>
     </div>
     <script src="js/vendor/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

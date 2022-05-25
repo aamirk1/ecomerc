@@ -16,8 +16,9 @@ function get_safe_value($con,$str){
     }
 }
 
-function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$sort_order='',$is_best_seller='',$sub_categories=''){
-    $sql="select product.*,categories.categories from product,categories where product.status=1 ";
+function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$sort_order='',$is_best_seller='',$sub_categories='',$attr_id=''){
+    $sql="select product.*,categories.categories,product_attributes.mrp,product_attributes.price,product_attributes.qty from product,categories,product_attributes where product.status=1 and product.id=product_attributes.product_id";
+	
     if($cat_id!=''){
         $sql.=" and product.categories_id=$cat_id";
     }
@@ -30,10 +31,16 @@ function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$so
     if($is_best_seller!=''){
         $sql.=" and product.best_seller=1";
     }
+    if($attr_id>0){
+		$sql.=" and product_attributes.id=$attr_id";
+	}
     $sql.=" and product.categories_id=categories.id";
     if($search_str!=''){
         $sql.=" and (product.name like '%$search_str%' or product.description like '%$search_str%')";
     }
+
+    $sql.=" group by product.id ";
+    
     if($sort_order!=''){
         $sql.=$sort_order;
     }else{
@@ -63,11 +70,11 @@ function productSoldQtyByProductId($con,$pid,$attr_id){
 	return $row['qty'];
 }
 
-function productQty($con,$pid){
-    $sql="select qty from product where id='$pid'";
-    $res=mysqli_query($con,$sql);
-    $row=mysqli_fetch_assoc($res);
-    return $row['qty'];
+function productQty($con,$pid,$attr_id){
+	$sql="select qty from product_attributes where id='$attr_id'";
+	$res=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($res);
+	return $row['qty'];
 }
 function SentInvoice($con,$order_id){
 

@@ -6,11 +6,11 @@ class add_to_cart{
 	
 	function updateProduct($pid,$qty,$attr_id){
 		if(isset($_SESSION['cart'][$pid][$attr_id])){
-			$_SESSION['cart'][$pid]['qty'][$attr_id]=$qty;
+			$_SESSION['cart'][$pid][$attr_id]['qty']=$qty;
 		}
 	}
 	
-	function removeProduct($pid){
+	function removeProduct($pid,$attr_id){
 		if(isset($_SESSION['cart'][$pid][$attr_id])){
 			unset($_SESSION['cart'][$pid][$attr_id]);
 		}
@@ -22,7 +22,12 @@ class add_to_cart{
 	
 	function totalProduct(){
 		if(isset($_SESSION['cart'])){
-			return count($_SESSION['cart']);
+			//return count($_SESSION['cart']);
+			$totalCount=0;
+			foreach($_SESSION['cart'] as $list){
+				$totalCount=$totalCount+count($list);
+			}
+			return $totalCount;
 		}else{
 			return 0;
 		}
