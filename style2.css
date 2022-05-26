@@ -67,3 +67,75 @@ h2{
     color: white;
     font-size: 16px;
 }
+
+
+.textSection .ql-editor p {
+    font-size: 18px;
+}
+.ql-editor .ql-align-center {
+    text-align: center;
+}
+.ql-editor p {
+    font-size: 16px;
+    line-height: 26px;
+}
+.ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6, .ql-editor ol, .ql-editor p, .ql-editor pre, .ql-editor ul {
+    margin: 0;
+    padding: 0;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.ql-bubble, .ql-bubble * {
+    box-sizing: border-box;
+}
+figure, h1, h2, h3, h4, hr, p {
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+    border: 0 solid;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.ql-editor>* {
+    cursor: text;
+}
+.ql-editor, .ql-font-theme-font {
+    font-family: prompt;
+}
+.ql-editor {
+    box-sizing: border-box;
+    line-height: 1.42;
+    height: 100%;
+    outline: none;
+    overflow-y: auto;
+    padding: 12px 15px;
+    tab-size: 4;
+    -moz-tab-size: 4;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.ql-container {
+    box-sizing: border-box;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    height: 100%;
+    margin: 0;
+    position: relative;
+}
+.font-normal {
+    font-weight: 400;
+}
+.bg-textBg {
+    --bg-opacity: 1;
+    background-color: #f2f2f2;
+    background-color: rgba(242,242,242,var(--bg-opacity));
+}
+.msghai{
+    margin-bottom: 15px;
+}

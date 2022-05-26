@@ -89,7 +89,7 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
         <section class="htc__product__details bg__white ptb--100">
             <!-- Start Product Details Top -->
             <div class="htc__product__details__top">
-                <div class="container">
+                <div class="container product__container">
                     <div class="row">
                         <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
                             <div class="htc__product__details__tab__content">
@@ -117,8 +117,8 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                             <div class="ht__product__dtl">
                                 <h2><?php echo $get_product['0']['name']?></h2>
                                 <ul  class="pro__prize">
-                                    <li class="old__prize"><?php echo $get_product['0']['mrp']?></li>
-                                    <li class="new__price"><?php echo $get_product['0']['price']?></li>
+                                    <li class="old__prize"><strike>₹ <?php echo $get_product['0']['mrp']?></strike></li>
+                                    <li class="new__price">₹ <?php echo $get_product['0']['price']?></li>
                                 </ul>
                                 <p class="pro__info"><?php echo $get_product['0']['short_decs']?></p>
                                 <div class="ht__pro__desc">
@@ -342,10 +342,10 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
         ?>
 
         <section class="htc__produc__decription bg__white">
-            <div class="container">
+            <div class="container product__container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3 style="font-size: 20px;font-weight: bold;margin-bottom: 20px;">Recently Viewed</h3>
+                        <h3 style="font-size: 20px;font-weight: bold;margin-bottom: 20px; margin-top: 5px;">Recently Viewed</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -363,15 +363,12 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
                                         <div class="fr__hover__info">
                                             <ul class="product__action">
                                                 <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id']?>','add')"><i class="icon-heart icons"></i></a></li>
-                                                <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id']?>','add')"><i class="icon-handbag icons"></i></a></li>
+                                                <li><a href="product.php?id=<?php echo $list['id']?>" ><i class="icon-handbag icons"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="fr__product__inner">
                                             <h4><a href="product-details.html"><?php echo $list['name']?></a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize"><?php echo $list['mrp']?></li>
-                                                <li class="new__price"><?php echo $list['price']?></li>
-                                            </ul>
+              
                                         </div>
                                     </div>
                                 </div>

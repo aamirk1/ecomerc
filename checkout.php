@@ -73,13 +73,63 @@ if(isset($_POST['submit'])){
 	}
 
 	
-    unset($_SESSION['cart']);
-    //SentInvoice($con,$order_id);
-    ?>
-    <script>
-        window.location.href='thank_you.php';
-    </script>
-    <?php
+	if($payment_type=='instamojo'){
+		
+		$userArr=mysqli_fetch_assoc(mysqli_query($con,"select * from users where id='$user_id'"));
+		
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'https://test.instamojo.com/api/1.1/payment-requests/');
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		curl_setopt($ch, CURLOPT_HTTPHEADER,
+			array("X-Api-Key:".INSTAMOJO_KEY,"X-Auth-Token:".INSTAMOJO_TOKEN)
+		);
+		
+		$payload = Array(
+			'purpose' => 'Buy Product',
+			'amount' => $total_price,
+			'phone' => $userArr['mobile'],
+			'buyer_name' => $userArr['name'],
+			'redirect_url' => INSTAMOJO_REDIRECT,
+			'send_email' => true,
+			'send_sms' => false,
+			'email' => $userArr['email'],
+			'allow_repeated_payments' => false
+		);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
+		$response = curl_exec($ch);
+		curl_close($ch); 
+		$response=json_decode($response);
+		if(isset($response->payment_request->id)){
+			unset($_SESSION['cart']);
+			$_SESSION['TID']=$response->payment_request->id;
+			mysqli_query($con,"update `order` set txnid='".$response->payment_request->id."' where id='".$order_id."'");
+			?>
+			<script>
+			window.location.href='<?php echo $response->payment_request->longurl?>';
+			</script>
+			<?php
+		}else{
+			if(isset($response->message)){
+				$errMsg.="<div class='instamojo_error'>";
+				foreach($response->message as $key=>$val){
+					$errMsg.=strtoupper($key).' : '.$val[0].'<br/>';				
+				}
+				$errMsg.="</div>";
+			}else{
+				echo "Something went wrong";
+			}
+		}
+	}else{	
+		SentInvoice($con,$order_id);
+		?>
+        <script>
+            window.location.href='thank_you.php';
+        </script>
+        <?php
+    }
 }
 ?>
 
@@ -218,7 +268,7 @@ if(mysqli_num_rows($lastOrderDetailsRes)>0){
                                     <div class="paymentinfo">
                                         <div class="single-method">
                                             COD <input type="radio"  value="COD" name="payment_type" required/>
-                                            &nbsp;&nbsp;PayU <input type="radio"  value="payu" name="payment_type" required/>
+                                            &nbsp;&nbsp;Instamojo <input type="radio"  value="instamojo" name="payment_type" required/>
                                         </div>
                                         <div class="single-method">
                                             

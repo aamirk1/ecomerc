@@ -24,9 +24,9 @@ $script_name=$_SERVER['SCRIPT_NAME'];
 $script_name_arr=explode('/',$script_name);
 $mypage=$script_name_arr[count($script_name_arr)-1];
 
-$meta_title="AKart Website";
-$meta_desc="AKart Website";
-$meta_keyword="AKart Website";
+$meta_title="Masav";
+$meta_desc="Masav";
+$meta_keyword="Masav";
 $meta_url=SITE_PATH;
 $meta_image='';
 if($mypage=='product.php'){

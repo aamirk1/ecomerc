@@ -65,7 +65,7 @@ if($cat_id>0){
             </div>
         </div>
         <section class="htc__product__grid bg__white ptb--100">
-            <div class="container">
+            <div class="container product__container">
                 <div class="row">
                     <?php if(count($get_product)>0){?>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -103,8 +103,8 @@ if($cat_id>0){
                                             <div class="fr__product__inner">
                                                 <h4><a href="product-details.html"><?php echo $list['name']?></a></h4>
                                                 <ul class="fr__pro__prize">
-                                                    <li class="old__prize"><?php echo $list['mrp']?></li>
-                                                    <li><?php echo $list['price']?></li>
+                                                    <li class="old__prize"><strike>₹ <?php echo $list['mrp']?></strike></li>
+                                                    <li class="new__price">₹ <?php echo $list['price']?></li>
                                                 </ul>
                                             </div>
                                         </div>

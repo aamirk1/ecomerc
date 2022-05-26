@@ -124,8 +124,8 @@
     color: #313131;
     font-family: Poppins;
     font-size: 40px;
-    font-weight: 650;
-    margin-top: -45px;
+    font-weight: 640;
+    margin-top: -40px;
 }
 .section__title--2 p {
     color: #333;
@@ -221,7 +221,7 @@
 
 .category {
     position: relative;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 .fr__hover__info {
     position: absolute;
@@ -231,6 +231,11 @@
 .fr__product__inner {
     padding-top: 23px;
     text-align: center;
+    margin-top: 5px;
+    background-color: #fff3eb;
+}
+.product__container{
+    background-color:#E4E0E0;
 }
 .fr__product__inner h4 a {
     color: #444;
@@ -247,6 +252,7 @@
     display: flex;
     justify-content: center;
     margin-top: 6px;
+    margin-bottom: 6px;
 }
 .fr__pro__prize li {
     color: #313131;
@@ -1837,6 +1843,7 @@ select.ht__select {
     font-family: Old Standard TT;
     font-size: 20px;
     font-weight: 600;
+    margin-top: 10px;
     text-transform: uppercase;
 }
 .ht__product__dtl h6 {
@@ -3621,4 +3628,7 @@ ul.htc__instagram__posts.owl-carousel li img {
 	color: red;
     margin-top: 20px;
     font-size: 25px;
+}
+.ptb--100 {
+    padding: 50px 0;
 }
