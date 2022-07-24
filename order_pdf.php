@@ -15,6 +15,47 @@ $css=file_get_contents('css/bootstrap.min.css');
 $css.=file_get_contents('style.css');
 
 $html='<div class="wishlist-table table-responsive">
+
+    <div class="avs">
+    <h3>Masav</h3>
+    </div>
+    <div>
+
+    <div>';
+
+    if(isset($_SESSION['ADMIN_LOGIN'])){            
+        $ord=mysqli_query($con,"select `order`.*, order_status.name as order_status_str from `order`,order_status where `order`.user_id='$uid' and order_status.id=`order`.order_status");       
+    }else{
+        $uid=$_SESSION['USER_ID'];
+        $ord=mysqli_query($con,"select `order`.*, order_status.name as order_status_str from `order`,order_status where `order`.user_id='$uid' and order_status.id=`order`.order_status");
+
+        //query problem only
+    }
+                                
+    while ($roww=mysqli_fetch_assoc($ord)) {
+        
+        $html.='<div>
+        
+        <div>
+            <span>Order Id: OD'.$roww['id'].'</span><br>
+            <span>Order Date: '.$roww['added_on'].'</span>
+        </div>
+        <div class="mpd2">
+            <strong>Shipping Details:</strong><br>
+            <span class="una">Customer Name: '.$_SESSION['USER_NAME'].', </span><br>
+            <span id="addr">Address: '.$roww['address'].','.$roww['city'].','.$roww['pincode'].'</span><br>            
+        </div>
+        
+        <hr>
+                                            
+            
+        </div>';
+    }   
+
+    $html.='</div>
+    </div>
+
+
     <table>
         <thead>
             <tr>

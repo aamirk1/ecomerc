@@ -24,9 +24,9 @@ $script_name=$_SERVER['SCRIPT_NAME'];
 $script_name_arr=explode('/',$script_name);
 $mypage=$script_name_arr[count($script_name_arr)-1];
 
-$meta_title="Masav";
-$meta_desc="Masav";
-$meta_keyword="Masav";
+$meta_title="Maasav";
+$meta_desc="Maasav";
+$meta_keyword="Maasav";
 $meta_url=SITE_PATH;
 $meta_image='';
 if($mypage=='product.php'){
@@ -93,7 +93,7 @@ if($mypage=='product.php'){
                   <div class="menumenu__container clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
                            <div class="logo">
-                                 <a href="index.php"><H2>Masav</H2></a>
+                                 <a href="index.php"><H2>Maasav</H2></a>
                            </div>
                         </div>
                         <div class="col-md-7 col-lg-6 col-sm-5 col-xs-3">
@@ -173,7 +173,7 @@ if($mypage=='product.php'){
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                    <a class="dropdown-item" href="my_order.php">&nbsp;&nbsp;Order </a>
                                                    <a class="dropdown-item" href="profile.php">&nbsp;&nbsp;Profile </a>
-                                                   <a class="dropdown-item" href="http://localhost/masav/project2/login.php">&nbsp;&nbsp;Admin Login </a>
+                                                   <a class="dropdown-item" href="http://localhost/masav/admin/login.php">&nbsp;&nbsp;Admin Login </a>
                                                    <a class="dropdown-item" href="logout.php">&nbsp;&nbsp;Logout </a>
                                                 </div>
                                              </li>

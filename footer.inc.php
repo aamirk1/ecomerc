@@ -10,28 +10,28 @@
         <div class="f-1">
             <h2>Help</h2>
             <ul>
-                <li><a href="">Payments</a></li>
-                <li><a href="">Shipping</a></li>
-                <li><a href="">Cancellation & Return</a></li>
-                <li><a href="">FAQ</a></li>
+                <li><a href="footer_pages/payments.php">Payments</a></li>
+                <li><a href="footer_pages/shipping.php">Shipping</a></li>
+                <li><a href="#">Cancellation & Return</a></li>
+                <li><a href="#">FAQ</a></li>
             </ul>
         </div>
         <div class="f-1">
             <h2>Policy</h2>
             <ul>
-                <li><a href="">Return Policy</a></li>
-                <li><a href="">Term & Conditions</a></li>
-                <li><a href="">Privacy</a></li>
-                <li><a href="">Security</a></li>
-                <li><a href="">Sitemap</a></li>
+                <li><a href="return_policy.php">Return Policy</a></li>
+                <li><a href="footer_pages/term&condition.php">Term & Conditions</a></li>
+                <li><a href="footer_pages/privacy.php">Privacy</a></li>
+                <li><a href="footer_pages/security.php">Security</a></li>
+                <li><a href="footer_pages/sitemap.php">Sitemap</a></li>
             </ul>
         </div>
         <div class="f-1">
             <h2>Social</h2>
             <ul>
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Instagram</a></li>
-                <li><a href="">YouTube</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">YouTube</a></li>
             </ul>
         </div>
         <div class="right-content">
@@ -57,7 +57,7 @@
         
     </div>
     <div class="copy">
-        Copyright &copy; <?php echo date('Y')?> &nbsp;Masav.in</a>
+        Copyright &copy; <?php echo date('Y')?> &nbsp;<a href="#">Maasav.com</a>
         <span class="card"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd53rsgZUQ1IcJavNNywppBKDIEZd52JSuAd5NKQ6gjZR7PluwwNfvDIapigvMnUj7JfE0gTyEqM8Zms_xm_fSb7BNQF2P-on6n9HVZbCb8VmZCmQJhz_TpnTuLCleWaPrj6BxSviFpQF8w1o94B3QAdRkRatC6fj3U3tjOYNaoO6N7a_r0I13Ylg9/s320/allcard.png"></span>
     </div>
     <script src="js/vendor/jquery-3.2.1.min.js"></script>
