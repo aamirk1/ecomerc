@@ -34,7 +34,11 @@ require('header.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">our address</h2>
-                                <p>Maharashtra Mumbai 400003 </p>
+                                <p>Tulinj Road, Central Park,<br>
+                                    Near Police Chawki,<br>
+                                    Mumbai 401209,<br>
+                                    Maharashtra,India.
+                                </p>
                             </div>
                         </div>
                         <div class="address">
@@ -45,9 +49,18 @@ require('header.php');
                                 <h2 class="ct__title">openning hour</h2>
                                 <p>08am to 10pm</p>
 
-                                <p>Maharashtra Mumbai 400003 </p>
+                                <p>Tulinj Road, Central Park,<br>
+                                    Near Police Chawki,<br>
+                                    Mumbai 401209,<br>
+                                    Maharashtra,India.
+                                </p>
                             </div>
                         </div>
+                        <p class="text2">Masav,<br>
+                    Tulinj Road, Central Park,<br>
+                    Near Police Chawki,<br>
+                    Mumbai 401209,<br>
+                    Maharashtra,India.</p>
 
                         <div class="address">
                             <div class="address__icon">
@@ -55,7 +68,7 @@ require('header.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">Phone Number</h2>
-                                <p>+91-9561321697</p>
+                                <p>+91-7558726131</p>
                             </div>
                         </div>
                     </div>      

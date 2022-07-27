@@ -123,7 +123,7 @@ if(isset($_POST['submit'])){
 			}
 		}
 	}else{	
-		SentInvoice($con,$order_id);
+		//SentInvoice($con,$order_id);
 		?>
         <script>
             window.location.href='thank_you.php';

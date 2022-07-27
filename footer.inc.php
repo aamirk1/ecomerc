@@ -50,7 +50,7 @@
                     Near Police Chawki,<br>
                     Mumbai 401209,<br>
                     Maharashtra,India.<br>
-                    Mobile No.: <span style="color: blue;">9766314537</span>
+                    Mobile No.: <span style="color: blue;">7558726131</span>
                 </p>
             </div>
         </div>

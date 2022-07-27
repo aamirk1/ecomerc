@@ -38,7 +38,4 @@ if($check_user>0){
 	echo "Email Id Not Register With Us";
 	die();
 }
-
-
-
 ?>
