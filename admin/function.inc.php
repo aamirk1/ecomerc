@@ -47,4 +47,14 @@ function isAdmin(){
         <?php
     }
 }
+
+function imageCompress($source,$path,$quality=60){
+	$arr=getimagesize($source);
+	if($arr['mime']=="image/png"){
+		$i=imagecreatefrompng($source);
+	}else{
+		$i=imagecreatefromjpeg($source);
+	}
+	imagejpeg($i,$path,$quality);
+}
 ?>

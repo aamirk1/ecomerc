@@ -1980,8 +1980,8 @@ header .form-inline .search-form.close {
     color: #868e96;
     font-size: 12px;
     font-weight: 400;
-    padding: .75em 0.7em;
-    text-transform: uppercase;
+    padding: .75em 1.25em;
+    text-transform: uppercase
 }
 
 .table-stats table th img,
@@ -1999,7 +1999,7 @@ header .form-inline .search-form.close {
 
 .table-stats table td {
     color: #343a40;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     text-transform: capitalize;
     vertical-align: middle
@@ -3163,10 +3163,10 @@ footer.site-footer .footer-inner a {
     }
     .card-footer.bg-white [class*=float].fa {
         display: inline-block;
-        float: left!important;
+        float: left!important
     }
     #traffic-chart {
-        height: 232px!important;
+        height: 232px!important
     }
     i.p-4.font-3xl.width-90.text-center.mr-3.float-left.text-light {
         font-size: 1.8125em;
@@ -3356,16 +3356,19 @@ footer.site-footer .footer-inner a {
 .badge a{
 	color:#fff;
 }
-.field_error{
+
+#address_details{
+	margin:10px;
+}
+
+.shiprocket_error{
+	padding: 32px;
+    padding-bottom: 0px;
+    font-size: 20px;
     color: red;
-    margin-top: 15px;
-}
-.pdf_download{
-    color: #000;
     font-weight: bold;
-    font-size: 16px;
-    margin-top: 5px;
 }
+
 .mt20{
-    margin-top: 20px;
+	margin-top:20px;
 }

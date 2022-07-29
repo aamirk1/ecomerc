@@ -1,3 +1,9 @@
+/**
+ * [图片放大镜jquery插件]
+ * @Author: Fu Xiaochun
+ * @Email:  f2e.xiaochun@gmail.com
+ * @Link:   www.fuxiaochun.com
+ */
 
 (function(window, $) {
     function ImgZoom(options) {

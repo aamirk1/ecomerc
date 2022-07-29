@@ -1,3 +1,13 @@
+/*-----------------------------------------------------------------------------------
+
+  Template Name: Asbab eCommerce HTML5 Template.
+  Template URI: #
+  Description: Asbab is a unique website template designed in HTML with a simple & beautiful look. There is an excellent solution for creating clean, wonderful and trending material design corporate, corporate any other purposes websites.
+  Author: HasTech
+  Author URI: https://themeforest.net/user/hastech/portfolio
+  Version: 1.0
+
+-----------------------------------------------------------------------------------*/
 
 /*-------------------------------
 [  Table of contents  ]
@@ -420,6 +430,3 @@
 
 
 })(jQuery);
-
-
-
