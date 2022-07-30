@@ -175,7 +175,7 @@ if(isset($_POST['submit'])){
 						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
 						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
 						//imageCompress($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
-						mysqli_query($con,"insert into product_images(product_id,product_images) values('$id','$image')");
+						mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");
 					}
 				}
 			}
@@ -188,7 +188,7 @@ if(isset($_POST['submit'])){
 						$image=rand(111111111,999999999).'_'.$_FILES['product_images']['name'][$key];
 						move_uploaded_file($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
 						//imageCompress($_FILES['product_images']['tmp_name'][$key],PRODUCT_MULTIPLE_IMAGE_SERVER_PATH.$image);
-						mysqli_query($con,"insert into product_images(product_id,product_images) values('$id','$image')");
+						mysqli_query($con,"insert into product_images(product_id,product_image) values('$id','$image')");
 					}
 				}
 			}
@@ -382,8 +382,8 @@ echo "<a target='_blank' href='".PRODUCT_IMAGE_SITE_PATH.$image."'><img width='1
 									 <?php
 									 if(isset($multipleImageArr[0])){
 foreach($multipleImageArr as $list){
-	echo '<div class="col-lg-6" style="margin-top:20px;" id="add_image_box_'.$list['id'].'"><label for="categories" class=" form-control-label">Image</label><input type="file" name="product_images[]" class="form-control" ><a href="manage_product.php?id='.$id.'&pi='.$list['id'].'" style="color:white;"><button type="button" class="btn btn-lg btn-danger btn-block"><span id="payment-button-amount"><a href="manage_product.php?id='.$id.'&pi='.$list['id'].'" style="color:white;">Remove</span></button></a>';
-	echo "<a target='_blank' href='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_images']."'><img width='150px' src='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_images']."'/></a>";
+	echo '<div class="col-lg-6" style="margin-top:20px;" id="add_image_box_'.$list['id'].'"><label for="categories" class=" form-control-label">Image</label><input type="file" name="product_image[]" class="form-control" ><a href="manage_product.php?id='.$id.'&pi='.$list['id'].'" style="color:white;"><button type="button" class="btn btn-lg btn-danger btn-block"><span id="payment-button-amount"><a href="manage_product.php?id='.$id.'&pi='.$list['id'].'" style="color:white;">Remove</span></button></a>';
+	echo "<a target='_blank' href='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_image']."'><img width='150px' src='".PRODUCT_MULTIPLE_IMAGE_SITE_PATH.$list['product_image']."'/></a>";
 	echo '<input type="hidden" name="product_images_id[]" value="'.$list['id'].'"/></div>';
 	
 }										 
