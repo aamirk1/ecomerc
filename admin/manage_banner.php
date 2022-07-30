@@ -44,6 +44,7 @@ if(isset($_POST['submit'])){
 			if($_FILES['image']['name']!=''){
 				$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 				move_uploaded_file($_FILES['image']['tmp_name'],BANNER_IMAGE_SERVER_PATH.$image);
+				//imageCompress($_FILES['image']['tmp_name'],BANNER_IMAGE_SERVER_PATH.$image);
 				mysqli_query($con,"update banner set btn_link='$btn_link',image='$image',order_no='$order_no' where id='$id'");
 			}else{
 				
@@ -52,6 +53,7 @@ if(isset($_POST['submit'])){
 		}else{
 			$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 			move_uploaded_file($_FILES['image']['tmp_name'],BANNER_IMAGE_SERVER_PATH.$image);
+			//imageCompress($_FILES['image']['tmp_name'],BANNER_IMAGE_SERVER_PATH.$image);
 			mysqli_query($con,"insert into banner(btn_link,image,order_no,status) values('$btn_link','$image','$order_no','1')");
 		}
 		redirect('banner.php');

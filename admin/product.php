@@ -29,7 +29,12 @@ if(isset($_GET['type']) && $_GET['type']!=''){
 	}
 }
 
-$sql="select product.*,categories.categories from product,categories where product.categories_id=categories.id $condition order by product.id desc";
+//$sql="select product.*,categories.categories from product,categories where product.categories_id=categories.id $condition order by product.id desc";
+//after
+$sql="select product.*,categories.categories,product_attributes.mrp,product_attributes.price,product_attributes.qty from product,categories,product_attributes where product.categories_id=categories.id and product.id=product_attributes.product_id $condition order by product.id desc";
+
+//select product.*,categories.categories,product_attributes.mrp,product_attributes.price,product_attributes.qty from product,categories,product_attributes where product.status=1 and product.id=product_attributes.product_id";
+
 $res=mysqli_query($con,$sql);
 ?>
 <div class="content pb-0">
@@ -62,7 +67,7 @@ $res=mysqli_query($con,$sql);
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
 							<tr>
-							   <td class="serial"><?php echo $i?></td>
+							   <td class="serial"><?php echo $i++?></td>
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['categories']?></td>
 							   <td><?php echo $row['name']?></td>

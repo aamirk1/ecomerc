@@ -1,8 +1,4 @@
-/*-----------------------------------------------------------------------------------
-  Template Name: Asbab eCommerce HTML5 Template.
-  Description: Asbab is a unique website template designed in HTML with a simple & beautiful look.
 
------------------------------------------------------------------------------------*/
 /*
     font-family: 'Old Standard TT', serif;
 
@@ -34,7 +30,8 @@
 .slider__fixed--height {
   align-items: center;
   display: flex;
-  height: 800px;
+  height: 290px;
+  margin-right: 3%;
 }
 .slider--one .slide {
     align-items: center;
@@ -74,7 +71,9 @@
     color: #fff;
 }
 .slide__thumb {
-    text-align: right;
+    align-items: center;
+    width: 1200px;
+    height: 284px;
 }
 
 
@@ -222,4 +221,3 @@
 }
 .slider__activation__wrap--5 .single-slide:focus{
   outline: none;}
-}

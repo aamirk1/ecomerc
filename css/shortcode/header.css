@@ -1,8 +1,4 @@
-/*-----------------------------------------------------------------------------------
-  Template Name: Asbab eCommerce HTML5 Template.
-  Description: Asbab is a unique website template designed in HTML with a simple & beautiful look.
 
--------------------------------------------------------------------------------------*/
 /*
     font-family: 'Old Standard TT', serif;
 
@@ -246,6 +242,7 @@ nav.off__canvars--menu ul li ul li a:hover {
 .header__search a {
   padding-right: 20px;
   position: relative;
+  margin-right: 20px;
 }
 .header__search a::before {
   background: #898989;
@@ -262,10 +259,9 @@ nav.off__canvars--menu ul li ul li a:hover {
 .header__account a {
     color: #000;
     font-size: 19px;
-    margin-right: 5px;
-    padding-right: 15px;
+    margin-right: 20px;
+    padding-right: 20px;
     position: relative;
-	line-height: 35px;
 }
 .header__account a::before {
     background: #898989 none repeat scroll 0 0;
@@ -273,12 +269,20 @@ nav.off__canvars--menu ul li ul li a:hover {
     height: 15px;
     position: absolute;
     right: 0;
+    top: 50;
     width: 2px;
 }
-.dropdown-item::before {
-    background: none !important;
-}
 
+
+.navbar-nav>li>.dropdown-menu a::before {
+  /*background: red none repeat scroll 0 0;
+  content: "";
+  height: 15px;
+  position: absolute;
+  right: 0;
+  top: 50;*/
+  width: 0px;
+}
 
 
 /*-----------------------------------------
@@ -988,9 +992,4 @@ h4.offset__title {
 }
 .shp__cart__wrap .shp__single__product + .shp__single__product {
   border-top: 1px solid #ddd;
-}
-.dropdown-menu{padding:10px;}
-.mr15{margin-right:15px !important;}
-.mr15::before {
-    top:0px;
 }
