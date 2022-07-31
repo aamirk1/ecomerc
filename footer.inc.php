@@ -4,7 +4,7 @@
             <ul>
                 <li><a href="">Contact Us</a></li>
                 <li><a href="">About Us</a></li>
-                <li><a href="">Sell On Masav</a></li>
+                <li><a href="http://localhost/masav/admin/login.php">Admin Login</a></li>
             </ul>
         </div>
         <div class="f-1">
@@ -70,7 +70,7 @@
     <script src="js/main.js"></script>
     <script src="js/jquery.imgzoom.js"></script>
     <script src="js/custom.js"></script>
-    
+    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
 
 </body>
 

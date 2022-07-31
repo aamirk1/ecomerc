@@ -219,6 +219,13 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 									<a class="fr__btn buy_now" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add','yes')">Buy Now</a>
 								
 								</div>
+                                <!-- <div class="social-menu">
+                                    <ul>
+                                        <li><a href="#" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    </ul>
+                                </div> -->
                                 <div id="social_share_box">
                                     <a target="_blank" href="https://api.whatsapp.com/send?text=<?php echo urlencode($get_product['0']['name'])?> <?php echo $meta_url ?>"><img src="images\icons\WhatsApp.png"></a>
 
@@ -315,7 +322,7 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 									   </div>
 									</div>
 									<?php } else {
-										echo "<span class='submit_review_hint'>Please <a href='login.php'>login</a> to submit your review</span>";
+										echo "<span class='submit_review_hint'>Please <strong><a href='login.php'>login</a></strong> to submit your review</span>";
 									}
 									?>
                                 </div>
