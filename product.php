@@ -316,9 +316,10 @@ $product_review_res=mysqli_query($con,"select users.name,product_review.id,produ
 											 </select>	<br/>
 											 <textarea class="form-control" cols="50" id="new-review" name="review" placeholder="Enter your review here..." rows="5"></textarea>
 											 <div class="text-right mt10">
-												<button class="btn btn-success btn-lg" type="submit" name="review_submit">Submit</button>
+												<button class="btn btn-success btn-lg"  type="submit" name="review_submit" style="margin-top: 5px;">Submit</button>
 											 </div>
 										  </form>
+                                          
 									   </div>
 									</div>
 									<?php } else {

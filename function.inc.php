@@ -655,7 +655,7 @@ function SentInvoice($con,$order_id){
 	$mail->SMTPSecure="tls";
 	$mail->SMTPAuth=true;
 	$mail->Username="admasav247@gmail.com";
-	$mail->Password="A@mir131";
+	$mail->Password="qaikpwxzbxxknraa";
 	$mail->SetFrom("admasav247@gmail.com");
 	$mail->addAddress($user_order['email']);
 	$mail->IsHTML(true);
