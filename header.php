@@ -2,7 +2,7 @@
 require('connection.inc.php');
 require('function.inc.php');
 require('add_to_cart.inc.php');
-$cat_res=mysqli_query($con,"Select * from categories where status=1 order by categories asc");
+$cat_res=mysqli_query($con,"Select * from categories where header_show=1 order by categories asc");
 $cat_arr=array();
 while($row=mysqli_fetch_assoc($cat_res)){
    $cat_arr[]=$row;

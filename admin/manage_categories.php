@@ -2,6 +2,7 @@
 require('header.inc.php');
 isAdmin();
 $categories='';
+$header_show='';
 $msg='';
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$id=get_safe_value($con,$_GET['id']);
@@ -10,6 +11,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 	if($check>0){
 		$row=mysqli_fetch_assoc($res);
 		$categories=$row['categories'];
+		$header_show=$row['header_show'];
 	}else{
 		redirect('categories.php');
 		
@@ -18,6 +20,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 
 if(isset($_POST['submit'])){
 	$categories=get_safe_value($con,$_POST['categories']);
+	$header_show=get_safe_value($con,$_POST['header_show']);
 	$res=mysqli_query($con,"select * from categories where categories='$categories'");
 	$check=mysqli_num_rows($res);
 	if($check>0){
@@ -35,9 +38,9 @@ if(isset($_POST['submit'])){
 	
 	if($msg==''){
 		if(isset($_GET['id']) && $_GET['id']!=''){		
-			mysqli_query($con,"update categories set categories='$categories' where id='$id'");
+			mysqli_query($con,"update categories set categories='$categories',header_show='$header_show' where id='$id'");
 		}else{
-			mysqli_query($con,"insert into categories(categories,status) values('$categories','1')");
+			mysqli_query($con,"insert into categories(categories,status,header_show) values('$categories','1','$header_show')");
 		}
 		redirect('categories.php');
 	}
@@ -54,6 +57,9 @@ if(isset($_POST['submit'])){
 						<div class="form-group">
 							<label for="categories" class=" form-control-label">Categories</label>
 							<input type="text" name="categories" placeholder="Enter your categories name" class="form-control" required value="<?php echo $categories?>">
+
+							<label for="header_show" class=" form-control-label">Header Show</label>
+							<input type="text" name="header_show" placeholder="Enter your header show" class="form-control" required value="<?php echo $header_show?>">
 						</div>
 						<button id="payment-button" name="submit" type="submit" class="btn btn-lg btn-info btn-block">
 							<span id="payment-button-amount" name="submit">Submit</span>

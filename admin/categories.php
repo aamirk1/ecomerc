@@ -11,7 +11,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
 		}else{
 			$status='0';
 		}
-		$update_status_sql="update categories set status='$status' where id='$id'";
+		$update_status_sql="update categories set status='$status',header_show='$header_show' where id='$id'";
 		mysqli_query($con,$update_status_sql);
 	}
 	if($type=='delete'){
@@ -41,6 +41,7 @@ $res=mysqli_query($con,$sql);
 						   <th class="serial">#</th>
 						   <th>ID</th>
 						   <th>Categories</th>
+						   <th>Header Show</th>
 						   <th></th>
 						</tr>
 					 </thead>
@@ -52,6 +53,7 @@ $res=mysqli_query($con,$sql);
 						   <td class="serial"><?php echo $i?></td>
 						   <td><?php echo $row['id']?></td>
 						   <td><?php echo $row['categories']?></td>
+						   <td><?php echo $row['header_show']?></td>
 						   <td>
 							<?php 
 							if($row['status']==1){
