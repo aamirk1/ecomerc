@@ -1,4 +1,62 @@
-<div class="footer">
+<footer>
+    <div class="containers">
+        <div class="rows" id="padd">
+            <div class="footer-col">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="http://localhost/masav/admin/login.php">Admin Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Help</h3>
+                <ul>
+                <li><a href="footer_pages/payments.php">Payments</a></li>
+                <li><a href="footer_pages/shipping.php">Shipping</a></li>
+                <li><a href="#">Cancellation & Return</a></li>
+                <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Policy</h3>
+                <ul>
+                    <li><a href="return_policy.php">Return Policy</a></li>
+                    <li><a href="footer_pages/term&condition.php">Term & Conditions</a></li>
+                    <li><a href="footer_pages/privacy.php">Privacy</a></li>
+                    <li><a href="footer_pages/security.php">Security</a></li>
+                    <li><a href="footer_pages/sitemap.php">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <form action="" method="post">
+                    <input type="text" placeholder="Enter Your Name" name="newsname" id="newsname">
+                    <input type="email" placeholder="Enter Your Email" name="newsemail" id="newsemail">
+                    <input type="button" onclick="newsletter()" value="Submit" id="newssubmit">
+                </form>
+                <div class="row socialIcons">
+                    <a href=""><i style="margin-left: 50px;" class="fa-brands fa-facebook"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                
+            </div>
+        </div>
+        <hr>
+        <div class="rows">
+            <div class="cols">
+                <p>&#169; <?php echo date('Y')?> &nbsp;<a href="#">Maasav.com</a></p>
+            </div>
+            <div class="socialIcons">
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- <div class="footer">
         <div class="f-1">
             <h2>About</h2>
             <ul>
@@ -59,7 +117,7 @@
     <div class="copy">
         Copyright &copy; <?php echo date('Y')?> &nbsp;<a href="#">Maasav.com</a>
         <span class="card"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd53rsgZUQ1IcJavNNywppBKDIEZd52JSuAd5NKQ6gjZR7PluwwNfvDIapigvMnUj7JfE0gTyEqM8Zms_xm_fSb7BNQF2P-on6n9HVZbCb8VmZCmQJhz_TpnTuLCleWaPrj6BxSviFpQF8w1o94B3QAdRkRatC6fj3U3tjOYNaoO6N7a_r0I13Ylg9/s320/allcard.png"></span>
-    </div>
+    </div> -->
     <script src="js/vendor/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins.js"></script>

@@ -30,8 +30,7 @@
 .slider__fixed--height {
   align-items: center;
   display: flex;
-  height: 290px;
-  margin-right: 3%;
+  height: 400px;
 }
 .slider--one .slide {
     align-items: center;
@@ -72,8 +71,8 @@
 }
 .slide__thumb {
     align-items: center;
-    width: 1200px;
-    height: 284px;
+    width: 1320px;
+    height: 390px;
 }
 
 

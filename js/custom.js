@@ -23,6 +23,26 @@ function send_message(){
 		});
 	}
 }
+function newsletter(){
+	var name=jQuery("#newsname").val();
+	var email=jQuery("#newsemail").val();
+	
+	if(name==""){
+		alert('Please enter name');
+	}else if(email==""){
+		alert('Please enter email');
+	}else{
+		jQuery.ajax({
+			url:'newsletter.php',
+			type:'post',
+			data:'name='+name+'&email='+email,
+			success:function(result){
+				alert(result);
+			}	
+		});
+	}
+}
+
 
 function user_register(){
 	jQuery('.field_error').html('');

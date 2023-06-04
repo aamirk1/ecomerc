@@ -4,69 +4,6 @@
     margin: 0;
     font-family: 'Roboto',sans-serif;
 }
-.footer{
-    display: flex;
-    background-color: #182337;
-    height: 290px;
-    padding: 20px;
-}
-.f-1{
-    margin: 10px 30px;
-}
-.f-1 ul{
-    list-style: none;
-}
-.f-1 li{
-    margin-top: 10px;
-}
-.f-1 ul li a{
-    color: white;
-    text-decoration: none;
-    font-size: 15px;
-}
-.f-1 ul li a:hover{
-    text-decoration: underline;
-}
-h2{
-    font-size: 18px;
-    color: #878787;
-    text-transform: uppercase;
-}
-.copy{
-    border-top: 1px solid #878787;
-    position: relative;
-    bottom: 50px;
-    display: flex;
-    padding-top: 10px;
-    padding-left: 10px; 
-    display:flex;
-    color: white;
-}
-.card{
-    position: relative;
-    left: 700px;
-}
-.right-content{
-    border-left: 1px solid #878787;
-    height: 150px;
-    position: relative;
-    top: 10px;
-    left: 190px;
-    display: flex;
-}
-.text1{
-    color: #878787;
-    font-weight: bold;
-}
-.right{
-    position: relative;
-    left: 30px;
-}
-.text2{
-    margin-top: 10px;
-    color: white;
-    font-size: 16px;
-}
 
 
 .textSection .ql-editor p {
@@ -187,4 +124,99 @@ p {
 }
 .social-menu ul li:nth-child(3) a:hover{
     background-color: #0077b5;
+}
+
+
+.wishcart_img{
+    width: 100px;
+    height: 60px;
+}
+
+
+
+
+footer{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto',sans-serif;
+}
+footer .containers{
+    background-color: #182337;
+}
+.rows{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 100px;
+
+}
+#padd{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.footer-col ul{
+    list-style: none;
+}
+.footer-col h3{
+    color: #f2f2f2;
+    margin-bottom: 25px;
+    font-size: 22px;
+    position: relative;
+
+}
+.footer-col ul li{
+    pad: 10px;
+}
+.footer-col ul li a{
+    color: wheat;
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+.footer-col ul li a:hover{
+    opacity: 1;
+}
+.footer-col input{
+    border: none;
+    width: 250px;
+    height: 45px;
+    display: block;
+    padding-left: 20px;
+    margin: 14px 0;
+}
+.footer-col #newssubmit{
+    padding: 0px 20px;
+    background-color: #e91e64;
+    border: none;
+    color: #f2f2f2;
+}
+.cols p{
+    color: whitesmoke;
+}
+.rows .socialIcons i{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    margin: 0 15px;
+    transition: 0.5s;
+}
+.rows .socialIcons i:hover{
+    color: #e91e64;
+}
+
+@media (max-width: 600px){
+    footer .rows{
+        flex-direction: column;
+        padding: 20px 30px;
+        text-align: center;
+    }
+
+    footer .footer-col ul{
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    .footer-col input{
+        width: 100%;
+    }
 }

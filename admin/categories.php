@@ -42,6 +42,7 @@ $res=mysqli_query($con,$sql);
 						   <th>ID</th>
 						   <th>Categories</th>
 						   <th>Header Show</th>
+						   <th>CATEGORy image</th>
 						   <th></th>
 						</tr>
 					 </thead>
@@ -54,6 +55,12 @@ $res=mysqli_query($con,$sql);
 						   <td><?php echo $row['id']?></td>
 						   <td><?php echo $row['categories']?></td>
 						   <td><?php echo $row['header_show']?></td>
+						   <td>
+						   <?php						   
+								echo "<a target='_blank' href='".CATEGORIES_IMAGE_SITE_PATH.$row['categories_img']."'><img width='150px' src='".CATEGORIES_IMAGE_SITE_PATH.$row['categories_img']."'/></a>";
+						
+						   ?>
+							</td>
 						   <td>
 							<?php 
 							if($row['status']==1){

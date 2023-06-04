@@ -65,6 +65,7 @@ if($mypage=='product.php'){
    <link rel="stylesheet" href="style.css">
    <link rel="stylesheet" href="style2.css">
    <link rel="stylesheet" href="css/responsive.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link rel="stylesheet" href="css/custom.css">
    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
    <style>
@@ -205,21 +206,21 @@ if($mypage=='product.php'){
       </div>
    </header>
    <div class="offset__wrapper">
-         <div class="search__area">
-            <div class="container" >
-               <div class="row" >
-                  <div class="col-md-12" >
-                        <div class="search__inner">
-                           <form action="search.php" method="get">
-                              <input placeholder="Search here... " type="text" name="str">
-                              <button type="submit"></button>
-                           </form>
-                           <div class="search__close__btn">
-                              <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
-                           </div>
+      <div class="search__area">
+         <div class="container" >
+            <div class="row" >
+               <div class="col-md-12" >
+                     <div class="search__inner">
+                        <form action="search.php" method="get">
+                           <input placeholder="Search here... " type="text" name="str">
+                           <button type="submit"></button>
+                        </form>
+                        <div class="search__close__btn">
+                           <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
                         </div>
-                  </div>
+                     </div>
                </div>
             </div>
-      </div>
+         </div>
+   </div>
    

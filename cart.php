@@ -57,14 +57,14 @@ $resAttr=mysqli_fetch_assoc(mysqli_query($con,"select product_attributes.*,color
 											$qty=$val1['qty'];
 											?>
 											<tr>
-												<td class="product-thumbnail"><a href="#"><img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$image?>"  /></a></td>
+												<td class="product-thumbnail"><a href="#"><img class="wishcart_img" src="<?php echo PRODUCT_IMAGE_SITE_PATH.$image?>"  /></a></td>
 												<td class="product-name"><a href="#"><?php echo $pname?></a>
 <?php
 if(isset($resAttr['color']) && $resAttr['color']!=''){
-	echo "<br/>".$resAttr['color'].''; 
+	echo "<br/> color: ".$resAttr['color'].''; 
 }
 if(isset($resAttr['size']) && $resAttr['size']!=''){
-	echo "<br/>".$resAttr['size'].''; 
+	echo "<br/> Size: ".$resAttr['size'].''; 
 }
 ?>				
 					<ul  class="pro__prize">
