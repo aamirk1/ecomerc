@@ -7,6 +7,37 @@ $coupon_value=$coupon_details['coupon_value'];
 $coupon_code=$coupon_details['coupon_code'];
 if(isset($_POST['update_order_status'])){
 	$update_order_status=$_POST['update_order_status'];
+	$update_sql='';
+	if($update_order_status==3){
+		$length=$_POST['length'];
+		$breadth=$_POST['breadth'];
+		$height=$_POST['height'];
+		$weight=$_POST['weight'];
+		
+		$update_sql=",length='$length',breadth='$breadth',height='$height',weight='$weight' ";
+		
+	}
+	
+	if($update_order_status=='5'){
+		mysqli_query($con,"update `order` set order_status='$update_order_status',payment_status='Success' where id='$order_id'");
+	}else{
+		mysqli_query($con,"update `order` set order_status='$update_order_status' $update_sql where id='$order_id'");
+	}
+	
+	if($update_order_status==3){
+		$token=validShipRocketToken($con);
+		if($token!=''){
+			placeShipRocketOrder($con,$token,$order_id);
+		}
+	}
+	
+	if($update_order_status==4){
+		$ship_order=mysqli_fetch_assoc(mysqli_query($con,"select ship_order_id from `order` where id='$order_id'"));
+		if($ship_order['ship_order_id']>0){
+			$token=validShipRocketToken($con);
+			cancelShipRocketOrder($token,$ship_order['ship_order_id']);
+		}
+	}
 	mysqli_query($con,"update `order` set order_status='$update_order_status' where id='$order_id'");
 }
 if($coupon_value==''){
@@ -86,19 +117,26 @@ if($coupon_value==''){
 
 								<div>
 									<form method="post">
-										<select name="update_order_status" class="form-control">
+										<select name="update_order_status" id="update_order_status" class="form-control" required onchange="select_status()">
 											<option>Select Status</option>
 											<?php
 											$res=mysqli_query($con,"select * from order_status");
 											while($row=mysqli_fetch_assoc($res)){
-												if($row['id']==$categories_id){
-													echo"<option selected value=".$row['id'].">".$row['name']."</option>";
-												}else{
-													echo"<option value=".$row['id'].">".$row['name']."</option>";
-												}
+												echo"<option value=".$row['id'].">".$row['name']."</option>";
+												
 											}
 											?>
 										</select>
+										<div id="shipped_box" style="display: none;">
+											<table>
+												<tr>
+													<td><input class="form-control" type="text" placeholder="Length" name="length" id=""></td>
+													<td><input class="form-control" type="text" placeholder="Breadth" name="breadth" id=""></td>
+													<td><input class="form-control" type="text" placeholder="Height" name="height" id=""></td>
+													<td><input class="form-control" type="text" placeholder="Weight" name="weight" id=""></td>
+												</tr>
+											</table>
+										</div>
 										<input type="submit" class="form-control"/>
 									</form>
 								</div>
@@ -110,6 +148,16 @@ if($coupon_value==''){
 		</div>
 	</div>
 </div>
+<script>
+	function select_status(){
+		var update_order_status=jQuery('#update_order_status').val();
+		if(update_order_status==3){
+			jQuery('#shipped_box').show();
+		}
+	}
+
+</script>
 <?php
+
 require('footer.inc.php');
 ?>

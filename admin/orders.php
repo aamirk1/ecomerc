@@ -25,6 +25,7 @@ $res=mysqli_query($con,$sql);
 								<th class="product-stock-stauts"><span class="nobr"> Payment Type </span></th>
 								<th class="product-add-to-cart"><span class="nobr"> Payment Status</span></th>
 								<th class="product-add-to-cart"><span class="nobr"> Order Status</span></th>
+								<th class="product-add-to-cart"><span class="nobr"> Shipment Details</span></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -48,6 +49,11 @@ $res=mysqli_query($con,$sql);
 								<td class="product-name"> <?php echo $row['payment_type']?></td>
 								<td class="product-name"> <?php echo $row['payment_status']?></td>
 								<td class="product-name"> <?php echo $row['order_status_str']?></td>
+								<td class="product-name"> 
+									<?php 
+									echo "Order Id: ". $row['ship_order_id'].'<br/>';
+									echo "Shipment Id: ". $row['ship_shipment_id'];
+									?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

@@ -16,11 +16,13 @@ $errMsg="";
 $address='';
 $city='';
 $pincode='';
+$state='';
 
 if(isset($_POST['submit'])){
 	$address=get_safe_value($con,$_POST['address']);
 	$city=get_safe_value($con,$_POST['city']);
 	$pincode=get_safe_value($con,$_POST['pincode']);
+	$state=get_safe_value($con,$_POST['state']);
 	$payment_type=get_safe_value($con,$_POST['payment_type']);
 	$user_id=$_SESSION['USER_ID'];
 	
@@ -56,7 +58,7 @@ if(isset($_POST['submit'])){
 		$coupon_code='';
 		$coupon_value='';	
 	}	
-    mysqli_query($con,"insert into `order`(user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on,coupon_id,coupon_code,coupon_value) values('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on','$coupon_id','$coupon_code','$coupon_value')");
+    mysqli_query($con,"insert into `order`(user_id,address,city,pincode,state,payment_type,total_price,payment_status,order_status,added_on,coupon_id,coupon_code,coupon_value) values('$user_id','$address','$city','$pincode','$state','$payment_type','$total_price','$payment_status','$order_status','$added_on','$coupon_id','$coupon_code','$coupon_value')");
 	
 	$order_id=mysqli_insert_id($con);
 	
@@ -222,13 +224,14 @@ if(isset($_POST['submit'])){
                                 </div>
                             </div>
                             <?php }else{
-$lastOrderDetailsRes=mysqli_query($con,"select address,city,pincode from `order` where user_id='".$_SESSION['USER_ID']."'");
+$lastOrderDetailsRes=mysqli_query($con,"select address,city,pincode,state from `order` where user_id='".$_SESSION['USER_ID']."'");
 
 if(mysqli_num_rows($lastOrderDetailsRes)>0){
 	$lastOrderDetailsRow=mysqli_fetch_assoc($lastOrderDetailsRes);
 	$address=$lastOrderDetailsRow['address'];
 	$city=$lastOrderDetailsRow['city'];
 	$pincode=$lastOrderDetailsRow['pincode'];
+	$state=$lastOrderDetailsRow['state'];
 }
 
 }
@@ -248,13 +251,25 @@ if(mysqli_num_rows($lastOrderDetailsRes)>0){
 														</div>
 														<div class="col-md-6">
 															<div class="single-input">
-																<input type="text" name="city" placeholder="City/State" required value="<?php echo $city?>">
+																<input type="text" name="city" placeholder="City" required value="<?php echo $city?>">
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="single-input">
-																<input type="text" name="pincode" placeholder="Post code/ zip" required value="<?php echo $pincode?>">
+																<input type="text" name="pincode" placeholder="Pincode/ zip" required value="<?php echo $pincode?>">
 															</div>
+														</div>
+                                                        <div class="col-md-6 single-input">
+                                                            <select name="state"  required >
+                                                                <option>Select State</option>
+                                                                <?php
+                                                                $res=mysqli_query($con,"select * from states");
+                                                                while($row=mysqli_fetch_assoc($res)){
+                                                                    echo"<option value=".$row['id'].">".$row['state']."</option>";
+                                                                    
+                                                                }
+                                                                ?>
+                                                            </select>
 														</div>
 														
 													</div>
