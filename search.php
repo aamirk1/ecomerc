@@ -36,7 +36,7 @@ if($str!=''){
             <div class="container">
                 <div class="row">
                     <?php if(count($get_product)>0){?>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
                         <div class="htc__product__rightidebar">
                             
                             <div class="row">
@@ -61,7 +61,7 @@ if($str!=''){
                                             <div class="fr__product__inner">
                                                 <h4><a href="product-details.html"><?php echo $list['name']?></a></h4>
                                                 <ul class="fr__pro__prize">
-                                                    <li class="old__prize"><strike>₹ <?php echo $list['mrp']?></strike></li>
+                                                    <li class="old__prize"><s>₹ <?php echo $list['mrp']?></s></li>
                                                     <li class="new__price">₹ <?php echo $list['price']?></li>
                                                 </ul>
                                             </div>

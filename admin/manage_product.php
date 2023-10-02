@@ -260,7 +260,7 @@ if(isset($_POST['submit'])){
 									<div class='row'>
 										<div class="col-lg-9">
 											<label for="categories" class=" form-control-label">Product Name</label>
-											<input type="text" name="name" placeholder="Enter product name" class="form-control" required value="<?php echo $name?>">
+											<input type="text" name="name" maxlength="35" placeholder="Enter product name" class="form-control" required value="<?php echo $name?>">
 										</div>
 										<div class="col-lg-3">
 											<label for="categories" class=" form-control-label">Best Seller</label>
